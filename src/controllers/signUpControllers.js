@@ -86,6 +86,7 @@ class signUpClass {
             let payload = {
                 id : user._id,
                 role : user.role,
+                email : user.email,
                 exp: Math.floor(Date.now() / 1000 + 24 * 60 * 60),
             }
             const token = jwt.sign(payload,key);
@@ -104,7 +105,29 @@ class signUpClass {
             console.log(e)
 
         }
-    }
+    };
+
+    updateUser = async (req,res)=>{
+        try {
+            let id = req.params.id;
+            let matchStage = {
+                _id : id
+            }
+            let name = req.body.name;
+            let email = req.body.email;
+            let img = req.body.img;
+            await signUpModel.findByIdAndUpdate(matchStage,{name:name,email:email,img:img});
+            return res.status(200).json({
+                status : "success",
+                data : "User Data Update Successfully"
+            });
+        }catch (e) {
+            return res.status(500).json({
+                status:"fail",
+                msg : "Something went worng"
+            });
+        }
+    };
 
 
 }

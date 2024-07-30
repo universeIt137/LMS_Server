@@ -32,10 +32,15 @@ app.use(express.json({limit: '50mb'}));
 
 
 const publicRoute = require("./src/routes/publicRoutes");
+const privateRoute = require("./src/routes/privateRoute");
 
-// Use Public routes
+//  Public routes
 
 app.use("/api/v1",publicRoute);
+
+// Private Routes
+
+app.use("/api/v1",privateRoute);
 
 
 
