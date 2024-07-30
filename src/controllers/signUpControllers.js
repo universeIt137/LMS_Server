@@ -129,6 +129,39 @@ class signUpClass {
         }
     };
 
+    deleteUser = async (req,res)=>{
+        try {
+            let id = req.params.id;
+            let filter = {
+                _id : id
+            };
+            const userData = await signUpModel.findOne(filter);
+            if (!userData) return res.status(404).send({
+                status:"fail",
+                msg:"User data not found"
+            });
+
+            if ((userData.role==="admin")||(userData.role==="superAdmin")){
+                await signUpModel.findByIdAndDelete(filter);
+                return res.status(200).json({
+                    status : "success",
+                    msg : "User data delete successfully"
+                });
+            }else {
+                return res.status(403).json({
+                    status : "fail",
+                    msg : "You have not allow permission "
+                })
+            }
+
+        }catch (e) {
+            return res.status(500).json({
+                status : 'fail',
+                msg : "Something went worng"
+            });
+        }
+    };
+
 
 }
 
