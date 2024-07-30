@@ -1,6 +1,6 @@
 const signUpModel = require("../models/signUpModel");
 const bcrypt = require('bcrypt');
-const {has} = require("express-mongo-sanitize");
+const jwt = require("jsonwebtoken");
 const saltRounds = 10;
 class signUpClass {
     signUp = async (req,res)=>{
@@ -68,6 +68,44 @@ class signUpClass {
 
         }
     };
+
+    login = async (req,res)=>{
+        try {
+            require("dotenv").config();
+            const key = process.env.SECRETKEY;
+            let password = req.body.password;
+            let email = req.body.email;
+            let user = await signUpModel.findOne({email:email});
+            if(!user){
+                return res.status(404).json({
+                    status:"fail",
+                    msg:"User not found"
+                });
+            }
+            const isMatch = await bcrypt.compare(password, user.password);
+            let payload = {
+                id : user._id,
+                role : user.role,
+                exp: Math.floor(Date.now() / 1000 + 24 * 60 * 60),
+            }
+            const token = jwt.sign(payload,key);
+            if (isMatch){
+                return res.status(201).json({
+                    status:"success",
+                    token : token
+                });
+            }else {
+                return res.status(404).json({
+                    status:"fail",
+                    msg:"User not found"
+                });
+            }
+        }catch (e) {
+            console.log(e)
+
+        }
+    }
+
 
 }
 
