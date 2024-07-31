@@ -5,7 +5,6 @@ const isValidUser = (req,res,next)=>{
         const userData = parseUserToken(req);
         next();
     }catch (e) {
-
         res.status(401).json({
             status:"fail",
             msg : "Invalid token"

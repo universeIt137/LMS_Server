@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const signUpController = require("../controllers/signUpControllers");
+const userController = require("../controllers/userControllers");
 const authMiddleware = require("../middleware/authMiddleware");
 
-// router.put("/update-user/id", authMiddleware.isValidUser, signUpController.updateUser);
 
-module.exports = router;
+
+router.put("/update-user/:id", authMiddleware.isValidUser, userController.updateUser);
+router.delete("/delete-user/:id", authMiddleware.isValidUser, userController.deleteUser);
+router.get("/single-user", authMiddleware.isValidUser, userController.singleUser);
+
+
+module.exports = router

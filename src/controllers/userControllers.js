@@ -1,6 +1,8 @@
-const signUpModel = require("../models/signUpModel");
+const userModel = require("../models/userModel");
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+const {parseToken, parseUserToken} = require("../helper/helper")
+const mongoose = require("mongoose");
 const saltRounds = 10;
 class signUpClass {
     signUp = async (req,res)=>{
@@ -9,7 +11,7 @@ class signUpClass {
             userData.role = "student";
             let {name,email,phone_number,password,img} = req.body;
 
-            let userEmail = await signUpModel.findOne({email:email});
+            let userEmail = await userModel.findOne({email:email});
             if (!name){
                 return res.status(400).json({
                     status:"fail",
@@ -43,7 +45,7 @@ class signUpClass {
                 })
             }else {
                 bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
-                    const newUser = new signUpModel({
+                    const newUser = new userModel({
                         name : req.body.name,
                         email : req.body.email,
                         password : hash,
@@ -72,10 +74,10 @@ class signUpClass {
     login = async (req,res)=>{
         try {
             require("dotenv").config();
-            const key = process.env.SECRETKEY;
+            const key = process.env.AUTH_SECRET;
             let password = req.body.password;
             let email = req.body.email;
-            let user = await signUpModel.findOne({email:email});
+            let user = await userModel.findOne({email:email});
             if(!user){
                 return res.status(404).json({
                     status:"fail",
@@ -116,7 +118,7 @@ class signUpClass {
             let name = req.body.name;
             let email = req.body.email;
             let img = req.body.img;
-            await signUpModel.findByIdAndUpdate(matchStage,{name:name,email:email,img:img});
+            await userModel.findByIdAndUpdate(matchStage,{name:name,email:email,img:img});
             return res.status(200).json({
                 status : "success",
                 data : "User Data Update Successfully"
@@ -135,7 +137,7 @@ class signUpClass {
             let filter = {
                 _id : id
             };
-            const userData = await signUpModel.findOne(filter);
+            const userData = await userModel.findOne(filter);
             if (!userData) return res.status(404).send({
                 status:"fail",
                 msg:"User data not found"
@@ -161,6 +163,35 @@ class signUpClass {
             });
         }
     };
+
+     singleUser = async (req, res) => {
+        const userToken = parseUserToken(req);
+        const authEmail = userToken.email;
+        try {
+            let filter = {email : authEmail};
+            let userData = await userModel.findOne(filter);
+            if (userData) {
+                return res.status(200).json({
+                    status: "success",
+                    data: userData
+                });
+            } else {
+                return res.status(404).json({
+                    status: "fail",
+                    msg: "Single user data not found"
+                });
+            }
+        } catch (e) {
+            console.log(e);
+            return res.status(500).json({
+                status: "fail",
+                msg: "something went wrong"
+            });
+        }
+    };
+
+
+
 
 
 }
