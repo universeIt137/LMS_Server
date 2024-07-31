@@ -10,8 +10,8 @@ router.post("/login", signUpController.login);
 // password reset routes
 
 router.get("/send-email/:email", passwordResetController.sendEmailUser);
-// router.get("/otp-verify", passwordResetController.otpVerify );
-// router.get("/password-reset", passwordResetController.resetPassword );
+router.get("/otp-verify", passwordResetController.verifyOtpCode);
+
 
 
 module.exports = router;
