@@ -42,6 +42,33 @@ class passwordResetClass {
             });
         }
     };
+    otpVerify = async (req,res)=>{
+        try {
+            let otpCode = req.body.otp;
+            let filter = {
+                otp : otpCode
+            };
+            let userOtpData = await otpModel.findOne(filter);
+            if (userOtpData){
+                const decodeData = jwt.verify(userOtpData.token, process.env.OTP_SECRET);
+                return res.status(200).json({
+                    status:"success",
+                    data : decodeData
+                });
+            }else {
+                return res.status({
+                    status:"fail",
+                    msg : "Otp time expired"
+                });
+            }
+        }catch (e) {
+            console.log(e)
+            return res.status(500).json({
+                status:"fail",
+                msg :"something went worng"
+            });
+        }
+    };
 
 }
 
