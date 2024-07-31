@@ -8,7 +8,7 @@ const otpSchema = new Schema({
     status:{
         type:String,
     },
-    token:{
+    email:{
         type : String,
     }
 },{timestamps:true,versionKey:false});

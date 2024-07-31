@@ -2,73 +2,53 @@ const otpModel = require("../models/otpModel");
 const userModel = require("../models/userModel");
 const sendEmailUtility = require("../utility/sendEmailUtility");
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 class passwordResetClass {
     sendEmailUser = async (req,res) => {
         try {
-            let email = req.params.email;
-            const otp = Math.floor(Math.random() * 1000000);
-            const emailText = `Your verification code is ${otp}`;
-            const emailSubject = `LMS Verification code `;
-            const status = 1;
-            let userData = await userModel.findOne({email:email});
-            const jwtToken = jwt.sign({
-                email: email,
-                exp: Math.floor(Date.now() / 1000) + (30), // 30 sec
-            },process.env.OTP_SECRET);
+            const email = req.params.email;
+            const code =  Math.floor(Math.random() * 999999);
 
+            const emailText = `Your verification code is: ${code}`;
+            const emailSub = "Your verification";
+            let status = 0
 
-            if (userData){
-                await sendEmailUtility(email,emailText,emailSubject);
-                await otpModel.create({
-                    otp : otp,
-                    token:jwtToken,
-                    status:status
-                })
-                return res.status(200).json({
-                    status:"success",
-                    data : "6 digit otp code send successfully"
+            // Check if the email exists in userModel
+            const user = await userModel.findOne({ email });
+
+            if (user) {
+                // Send email
+                await sendEmailUtility(email, emailText, emailSub);
+
+                // Find the existing OTP or create a new one
+                const otp = await otpModel.findOneAndUpdate(
+                    { email },
+                    { $set: { otp: code,status:status    } },
+                    { upsert: true, new: true }
+                );
+
+                res.status(200).json({
+                    status: "success",
+                    message: "6-digit OTP has been sent",
+                    data: otp,
                 });
-            }else {
-                return res.status(404).json({
-                    status:"fail",
-                    msg:"User not found"
+            } else {
+                res.status(404).json({
+                    status: "fail",
+                    message: "Email not found",
                 });
             }
-        }catch (e) {
-            console.log(e);
-            return res.status(500).json({
-                status:"fail",
-                msg:"something went worng"
+        } catch (error) {
+            res.status(500).json({
+                status: "fail",
+                message: error.toString(),
             });
         }
     };
-    otpVerify = async (req,res)=>{
-        try {
-            let otpCode = req.body.otp;
-            let filter = {
-                otp : otpCode
-            };
-            let userOtpData = await otpModel.findOne(filter);
-            if (userOtpData){
-                const decodeData = jwt.verify(userOtpData.token, process.env.OTP_SECRET);
-                return res.status(200).json({
-                    status:"success",
-                    data : decodeData
-                });
-            }else {
-                return res.status({
-                    status:"fail",
-                    msg : "Otp time expired"
-                });
-            }
-        }catch (e) {
-            console.log(e)
-            return res.status(500).json({
-                status:"fail",
-                msg :"something went worng"
-            });
-        }
-    };
+
+
 
 }
 
