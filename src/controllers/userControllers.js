@@ -190,8 +190,29 @@ class signUpClass {
         }
     };
 
+     allUser = async (req, res) => {
+         try {
+             let userToken = parseUserToken(req);
+             if ((userToken.role==="admin")||(userToken.role==="superAdmin")){
+                 let data = await userModel.find();
+                 return res.status(200).json({
+                     status :  "success",
+                     data : data
+                 });
+             }else {
+                 return res.status(403).json({
+                     status:"fail",
+                     msg : "Permission not allow"
+                 });
+             }
+         }catch (e) {
+             return res.status(500).json({
+                 status:"fail",
+                 msg:"something went worng"
+             });
 
-
+         }
+     };
 
 
 }
