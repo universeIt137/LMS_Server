@@ -1,16 +1,14 @@
 const jwt = require("jsonwebtoken");
 
-const parseUserToken = (req) => {
+const parseUserToken = (req)=>{
     try {
-        const authValue = req.headers.authorization;
-        const authToken = authValue?.split(' ')[1];
-        const decodedData = jwt.verify(authToken, process.env.SECRETKEY);
-        return decodedData?.data;
-    } catch (e) {
+        let authToken = req.headers.authorization;
+        let userToken = authToken.split(' ')[1];
+        const verifyToken = jwt.verify(userToken, process.env.AUTH_SECRET);
+        return verifyToken;
+    }catch (e) {
         throw new Error();
     }
-}
+};
 
-module.exports = {
-    parseUserToken,
-}
+module.exports = {parseUserToken};

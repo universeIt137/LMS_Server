@@ -28,5 +28,5 @@ const signUpSchema = new Schema({
 
 },{timestamps:true,versionKey:false});
 
-const signUpModel = model("signUp",signUpSchema);
-module.exports = signUpModel;
+const userModel = model("signUp",signUpSchema);
+module.exports = userModel;
