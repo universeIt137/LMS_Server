@@ -3,12 +3,13 @@ const { Schema,model } = mongoose;
 
 const otpSchema = new Schema({
     otp : {
-        type: String,
+        type: Number,
+        required: true,
     },
     status:{
         type:String,
     },
-    token:{
+    email:{
         type : String,
     }
 },{timestamps:true,versionKey:false});
