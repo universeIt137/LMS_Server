@@ -1,5 +1,7 @@
 const moduleModel = require("../models/moduleModel");
 const {parseUserToken} = require("../helper/helper");
+const checkAssociate = require("../services/checkAssociate");
+const deleteService = require("../services/deleteService");
 
 class moduleClass {
     moduleCreate = async (req,res)=>{
@@ -51,43 +53,11 @@ class moduleClass {
             });
         }
     };
+    
+
 }
 
 
 const moduleController = new moduleClass();
 
 module.exports = moduleController;
-
-
-exports.brandDeleteController = async (req,res)=>{
-    let deleteId = new mongoose.Types.ObjectId(req.params.id);
-    let associate = await checkAssociate({brandId: deleteId},productModel);
-    if (associate){
-        res.status(200).send({
-            status:"associate",
-            msg : "Associate with brand"
-        });
-    }else {
-        let result = await deleteService(req,brandModel);
-        console.log(result)
-        res.status(200).send(result);
-    }
-};
-
-const mongoose = require("mongoose");
-const deleteService =async (req,dataModel) => {
-    try {
-        let id = req.params.id;
-        let userEmail = req.headers["email"];
-        let queryObj = {};
-        queryObj["_id"] = id;
-        queryObj["userEmail"] = userEmail;
-        let data = await dataModel.deleteMany(queryObj);
-        return { status:"success",data:data };
-    }catch (e) {
-        return { status:"fail", msg:e.toString() };
-    }
-};
-
-
-module.exports = deleteService;

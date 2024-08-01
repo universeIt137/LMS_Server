@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const {parseUserToken} = require("../helper/helper");
 
 const deleteService = async (req,dataModel)=>{
