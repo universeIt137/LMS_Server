@@ -40,9 +40,7 @@ const moduleSchema = new Schema({
         type : Number,
         require : true
     },
-    feedback:{
-        type : String,
-    }
+
 },{timestamps:true,versionKey:false});
 
 const moduleModel = model("modules",moduleSchema);

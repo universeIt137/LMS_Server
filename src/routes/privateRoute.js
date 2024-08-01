@@ -25,6 +25,7 @@ router.get("/all-instructor" , authMiddleware.isSuperAdmin, instructorController
 // module api
 
 router.post("/module-create", authMiddleware.isValidUser, moduleController.moduleCreate);
+router.put("/module-update/:id" , authMiddleware.isValidUser, moduleController.moduleUpdate);
 
 
 
