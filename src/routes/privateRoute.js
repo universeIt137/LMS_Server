@@ -4,6 +4,7 @@ const userController = require("../controllers/userControllers");
 const authMiddleware = require("../middleware/authMiddleware");
 const instructorController = require("../controllers/instructorController");
 const moduleController = require("../controllers/moduleControllers");
+const courseController = require("../controllers/courseControllers");
 
 
 
@@ -25,6 +26,11 @@ router.get("/all-instructor" , authMiddleware.isSuperAdmin, instructorController
 
 router.post("/module-create", authMiddleware.isValidUser, moduleController.moduleCreate);
 
+
+
+// course api
+
+router.post("/course-create" , authMiddleware.isValidUser, courseController.courseCreate);
 
 
 

@@ -1,14 +1,19 @@
 const mongoose = require("mongoose");
+const stream = require("node:stream");
 const {Schema,model} = mongoose;
 
 const courseSchema = new Schema({
-    title : {
+    course_name : {
         type : String,
         require : true
     },
-    courseId : {
-        type : mongoose.Schema.Types.ObjectId,
+    instructor_name : {
+        type :String,
         require:true
+    },
+    instructor_img : {
+        type : String,
+        required:true
     },
     total_sit : {
         type : Number,
