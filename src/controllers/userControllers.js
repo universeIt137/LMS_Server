@@ -182,7 +182,6 @@ class signUpClass {
                 });
             }
         } catch (e) {
-            console.log(e);
             return res.status(500).json({
                 status: "fail",
                 msg: "something went wrong"
