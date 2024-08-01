@@ -26,6 +26,31 @@ class moduleClass {
             });
         }
     };
+    moduleUpdate = async (req,res)=>{
+        let userToken = parseUserToken(req);
+        try {
+            let id = req.params.id;
+            let filter = { _id : id };
+            let reqBody = req.body;
+            if (userToken.role==="superAdmin"){
+                await moduleModel.findByIdAndUpdate(filter,reqBody);
+                return res.status(200).json({
+                    status:"success",
+                    msg : "Module update successfully"
+                });
+            }else {
+                return res.status(403).json({
+                    status:"fail",
+                    msg : "Permission not allow"
+                });
+            }
+        }catch (e) {
+            return res.status(500).json({
+                status:"fail",
+                data : "Internal server error"
+            });
+        }
+    };
 }
 
 
