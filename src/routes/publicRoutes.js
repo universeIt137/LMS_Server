@@ -4,6 +4,8 @@ const router = express.Router();
 const signUpController = require("../controllers/userControllers");
 const passwordResetController = require("../controllers/passwordResetController");
 
+// user routes
+
 router.post("/sign-up",signUpController.signUp);
 router.post("/login", signUpController.login);
 
