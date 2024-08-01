@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require("../controllers/userControllers");
 const authMiddleware = require("../middleware/authMiddleware");
 const instructorController = require("../controllers/instructorController");
+const moduleController = require("../controllers/moduleControllers");
 
 
 
@@ -18,6 +19,11 @@ router.post("/instructor-create", authMiddleware.isSuperAdmin, instructorControl
 router.put("/instructor-update/:id" , authMiddleware.isSuperAdmin, instructorController.instructorUpdate);
 router.delete("/instructor-delete/:id" , authMiddleware.isSuperAdmin, instructorController.instructorDelete);
 router.get("/all-instructor" , authMiddleware.isSuperAdmin, instructorController.allInstructor);
+
+
+// module api
+
+router.post("/module-create", authMiddleware.isValidUser, moduleController.moduleCreate);
 
 
 
