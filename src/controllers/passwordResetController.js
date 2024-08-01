@@ -1,9 +1,7 @@
 const otpModel = require("../models/otpModel");
 const userModel = require("../models/userModel");
 const sendEmailUtility = require("../utility/sendEmailUtility");
-const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
-const e = require("express");
 const saltRounds = 10;
 
 class passwordResetClass {
@@ -82,6 +80,40 @@ class passwordResetClass {
             });
         }
     };
+    setNewPassword = async (req,res) => {
+        try {
+            const new_password = req.body.password
+            let email = req.body.email;
+            let otp = req.body.otp;
+            let statusUpdate = 1
+            let filter = {
+                email : email,
+                otp : otp,
+                status:statusUpdate
+            };
+            let userOtpData = await otpModel.findOne(filter);
+            if (userOtpData){
+                let  hashPassword = bcrypt.hashSync(new_password,saltRounds);
+                let data = await userModel.updateOne({email},{password:hashPassword});
+                await otpModel.updateOne({email},{otp:0,status:0});
+                return res.status(200).json({
+                    status : "success",
+                    data : data
+                });
+            }else {
+                return res.status(404).json({
+                    status:"fail",
+                    msg : "User otp data not found"
+                });
+            }
+
+        }catch (e) {
+            return res.status(500).json({
+                status:"fail",
+                msg : "something went worng"
+            });
+        }
+    }
 
 
 

@@ -11,6 +11,7 @@ router.post("/login", signUpController.login);
 
 router.get("/send-email/:email", passwordResetController.sendEmailUser);
 router.get("/otp-verify", passwordResetController.verifyOtpCode);
+router.get("/password-set", passwordResetController.setNewPassword );
 
 
 
