@@ -17,6 +17,7 @@ router.get("/all-user", authMiddleware.isValidUser, userController.allUser);
 router.post("/instructor-create", authMiddleware.isSuperAdmin, instructorController.instructorCreate);
 router.put("/instructor-update/:id" , authMiddleware.isSuperAdmin, instructorController.instructorUpdate);
 router.delete("/instructor-delete/:id" , authMiddleware.isSuperAdmin, instructorController.instructorDelete);
+router.get("/all-instructor" , authMiddleware.isSuperAdmin, instructorController.allInstructor);
 
 
 
