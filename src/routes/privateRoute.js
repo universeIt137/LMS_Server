@@ -15,6 +15,7 @@ router.get("/all-user", authMiddleware.isValidUser, userController.allUser);
 // instructor api
 
 router.post("/instructor-create", authMiddleware.isSuperAdmin, instructorController.instructorCreate);
+router.put("/instructor-update/:id" , authMiddleware.isSuperAdmin, instructorController.instructorUpdate);
 
 
 

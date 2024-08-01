@@ -26,6 +26,40 @@ class instructorClass  {
             });
         }
     };
+    instructorUpdate = async (req,res)=>{
+        try {
+            const userToken = parseUserToken(req);
+            let id = req.params.id;
+            const filter = { _id : id };
+            const reqBody = req.body;
+            console.log(reqBody);
+
+            let instructorData = await instructorModel.findById(filter);
+            if (!instructorData){
+                return res.status(404).json({
+                    status:"fail",
+                    msg : "Instructor data not found"
+                });
+            }else if (userToken.role==="superAdmin"){
+                let data = await instructorModel.findByIdAndUpdate(filter,reqBody);
+                return res.status(200).json({
+                    status:"success",
+                    data : data
+                });
+            }else {
+                return res.status(403).json({
+                    status:"fail",
+                    msg : "Permission not allow"
+                });
+            }
+
+        }catch (e) {
+            return res.status(500).json({
+                status:"fail",
+                msg : "Internal server error"
+            });
+        }
+    };
 }
 
 const instructorController = new instructorClass();
