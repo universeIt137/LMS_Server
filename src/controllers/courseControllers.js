@@ -34,7 +34,7 @@ class courseClass  {
                 });
             }
             else {
-                if (userToken.role==="admin" || userToken.role==="superAdmin"){
+                if (userToken.role==="admin" || userToken.role==="super-admin"){
                     const data = await courseModel.create(reqBody);
                     return res.status(201).json({
                         status : "success",

@@ -2,13 +2,14 @@ const moduleModel = require("../models/moduleModel");
 const {parseUserToken} = require("../helper/helper");
 const checkAssociate = require("../services/checkAssociate");
 const deleteService = require("../services/deleteService");
+const mongoose = require("mongoose");
 
 class moduleClass {
     moduleCreate = async (req,res)=>{
         let userToken = parseUserToken(req)
         try {
             let reqBody = req.body;
-            if (userToken.role==="admin"||userToken.role==="superAdmin"){
+            if (userToken.role==="admin"||userToken.role==="super-admin"){
                 let data = await moduleModel.create(reqBody);
                 return res.status(201).json({
                     status:"success",
@@ -54,7 +55,14 @@ class moduleClass {
         }
     };
     
+    moduleDelete = async (req,res)=>{
+        try {
+            let deleteId = new mongoose.Types.ObjectId(req.params.id)
+            const check = await checkAssociate({_id: deleteId},)
+        }catch (e) {
 
+        }
+    };
 }
 
 

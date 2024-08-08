@@ -1,10 +1,23 @@
 const express = require("express");
 const router = express.Router();
+// user controller
 const userController = require("../controllers/userControllers");
+
+// auth middleware
 const authMiddleware = require("../middleware/authMiddleware");
+
+// instructor controller
 const instructorController = require("../controllers/instructorController");
+
+// module controller
 const moduleController = require("../controllers/moduleControllers");
+
+// course controller
 const courseController = require("../controllers/courseControllers");
+
+// assignment controller
+const assignmentController = require("../controllers/assignmentController");
+const {isValidUser} = require("../middleware/authMiddleware");
 
 
 
@@ -32,6 +45,9 @@ router.put("/module-update/:id" , authMiddleware.isValidUser, moduleController.m
 // course api
 
 router.post("/course-create" , authMiddleware.isValidUser, courseController.courseCreate);
+
+// assignment api
+router.post("/assignment-create", authMiddleware.isValidUser, assignmentController.createAssignment);
 
 
 

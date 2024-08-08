@@ -7,35 +7,40 @@ const saltRounds = 10;
 class signUpClass {
     signUp = async (req,res)=>{
         try {
-            let userData = req.body;
-            userData.role = "student";
+
             let {name,email,phone_number,password,img} = req.body;
 
             let userEmail = await userModel.findOne({email:email});
+            let phoneNumber = await userModel.findOne({phone_number: phone_number});
             if (!name){
-                return res.status(400).json({
+                return res.status(428).json({
                     status:"fail",
                     msg : "User name required"
                 });
             }else if(!email){
-                return res.status(400).json({
+                return res.status(428).json({
                 status:"fail",
                 msg : "User email required"
             });
             }else if (!phone_number){
-                return res.status(400).json({
+                return res.status(428).json({
                     status:"fail",
                     msg : "User phone number required"
                 });
             }else if (!password){
-                return res.status(400).json({
+                return res.status(428).json({
                     status:"fail",
                     msg : "User  password required"
                 });
             }else if(!img){
-                return res.status(400).json({
+                return res.status(428).json({
                     status:"fail",
                     msg : "User  img required"
+                });
+            }else if (phoneNumber){
+                return res.status(409).json({
+                    status:"fail",
+                    msg : "Phone number already exists "
                 });
             }
             else if (userEmail){
@@ -61,8 +66,6 @@ class signUpClass {
                 });
             }
         }catch (e) {
-            console.log(e);
-
             res.status(500).json({
                 status:"fail",
                 msg : "Internal server error"
@@ -164,7 +167,7 @@ class signUpClass {
         }
     };
 
-     singleUser = async (req, res) => {
+    singleUser = async (req, res) => {
         const userToken = parseUserToken(req);
         const authEmail = userToken.email;
         try {
