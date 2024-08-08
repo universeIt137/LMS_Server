@@ -94,6 +94,64 @@ class assignmentClass {
         }
     };
 
+    singleAssignment = async (req,res)=>{
+        try {
+            let id = new mongoose.Types.ObjectId(req.params.id);
+            let matchStage = { $match : { _id : id} }
+            let joinWithCourseId = {
+                $lookup: {
+                    from: "courses",
+                    localField: "course_id",
+                    foreignField: "_id",
+                    as: "course_details"
+                }
+            };
+
+            let joinWithModuleId = {
+                $lookup: {
+                    from: "modules",
+                    localField: "module_id",
+                    foreignField: "_id",
+                    as: "module-details"
+                }
+            };
+
+            const unwindCourseDetails = { $unwind : "$course_details" };
+            const unwindModuleDetails = { $unwind : "$module-details" };
+
+            const projectionStage = {
+                $project : {
+                    "assignment_name" : 1,
+                    "course_details.course_name" : 1,
+                    "instructor_name" : 1,
+                    "module-details.module_name" : 1,
+                    "module-details.module_topic" : 1
+                }
+            }
+
+
+            const data = await assignmentModel.aggregate([
+                matchStage,
+                joinWithCourseId,
+                joinWithModuleId ,
+                unwindCourseDetails,
+                unwindModuleDetails,
+                projectionStage
+            ]);
+
+            return res.status(200).json({
+                status : "success",
+                data : data
+            })
+
+        }catch (e) {
+            return res.status(500).json({
+                status : "fail",
+                msg : e.toString()
+            });
+        }
+    };
+
 }
 
 const assignmentController = new assignmentClass();
