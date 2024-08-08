@@ -49,6 +49,7 @@ router.post("/course-create" , authMiddleware.isValidUser, courseController.cour
 // assignment api
 router.post("/assignment-create", authMiddleware.isValidUser, assignmentController.createAssignment);
 router.put("/assignment-update/:id", authMiddleware.isValidUser, assignmentController.updateAssignment);
+router.delete("/assignment-delete/:id", authMiddleware.isValidUser, assignmentController.deleteAssignment);
 
 
 
