@@ -48,6 +48,7 @@ router.post("/course-create" , authMiddleware.isValidUser, courseController.cour
 
 // assignment api
 router.post("/assignment-create", authMiddleware.isValidUser, assignmentController.createAssignment);
+router.put("/assignment-update/:id", authMiddleware.isValidUser, assignmentController.updateAssignment);
 
 
 

@@ -29,6 +29,39 @@ class assignmentClass {
 
         }
     };
+    updateAssignment = async (req,res)=>{
+        let userToken = parseUserToken(req);
+        try {
+            let id = req.params.id;
+            let matchStage = {
+                _id : id
+            };
+            let data = await assignmentModel.findById(matchStage);
+            if (!data) return res.status(404).json({
+                status : "fail",
+                msg : "User not found"
+            });
+            if ( userToken.role==="super-admin" || userToken.role==="admin" ){
+                let reqBody = req.body;
+                await assignmentModel.findByIdAndUpdate(matchStage,reqBody);
+                return res.status(200).json({
+                    status : "success",
+                    msg : 'Assignment update successfully'
+                });
+            }else {
+                return res.status(403).json({
+                    status : "fail",
+                    msg : "Permission not allow"
+                });
+            }
+        }catch (e) {
+            return res.status(500).json({
+                status : "fail",
+                msg : e.toString()
+            });
+        }
+    };
+
 }
 
 const assignmentController = new assignmentClass();
