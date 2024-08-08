@@ -51,6 +51,7 @@ router.post("/assignment-create", authMiddleware.isValidUser, assignmentControll
 router.put("/assignment-update/:id", authMiddleware.isValidUser, assignmentController.updateAssignment);
 router.delete("/assignment-delete/:id", authMiddleware.isValidUser, assignmentController.deleteAssignment);
 router.get("/single-assignment/:id", assignmentController.singleAssignment );
+router.get("/all-assignment" , authMiddleware.isValidUser , assignmentController.allAssignment);
 
 
 
