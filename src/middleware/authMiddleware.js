@@ -36,7 +36,7 @@ const isAdmin = (req,res,next)=>{
 const isSuperAdmin = (req,res,next)=>{
     try {
         const userData = parseUserToken(req);
-        if (userData.role==="superAdmin"){
+        if (userData.role==="super-admin"){
             next();
         }else {
             res.status(403).json({

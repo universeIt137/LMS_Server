@@ -7,7 +7,7 @@ const moduleSchema = new Schema({
         type : mongoose.Schema.Types.ObjectId
     },
     user_id : {
-        type : mongoose.Schema.Types.ObjectId
+        type : mongoose.Schema.Types.ObjectId,
     },
     module_name : {
         type : String,

@@ -14,8 +14,6 @@ const signUpSchema = new Schema({
     },
     password : {
         type : String,
-        min : 6,
-        max : 12,
         required : true
     },
     img : {
@@ -24,6 +22,8 @@ const signUpSchema = new Schema({
     },
     role : {
         type : String,
+        enum: ["user", "admin", "super-admin"],
+        default : "user"
     }
 
 },{timestamps:true,versionKey:false});
