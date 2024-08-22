@@ -38,6 +38,7 @@ class userClass {
             let reqBody = req.body;
             let id = req.params.id;
             let filter = { _id : id };
+            console.log(id)
             await userModel.findByIdAndUpdate(filter,reqBody);
             return res.status(200).json({
                 status : "success",
