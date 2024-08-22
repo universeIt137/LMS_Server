@@ -19,7 +19,6 @@ class userClass {
     allUser = async (req,res)=>{
         try {
             let data = await userModel.find();
-            console.log(data);
             return res.status(200).json({
                 status :"success",
                 data : data
