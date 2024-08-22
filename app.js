@@ -11,14 +11,17 @@ mongoose.connect(dbPort).then(()=>{
     console.log(e)
 })
 
-app.get("/",async(req,res)=>{
-    res.send("Server running");
-})
+
 
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
+
+
+app.get("/",async(req,res)=>{
+    res.send("Server running");
+})
 
 // user routes
 const router = require("./src/routes/userApi");
