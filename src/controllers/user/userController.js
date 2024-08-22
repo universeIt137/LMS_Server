@@ -17,6 +17,18 @@ class userClass {
             });
         }
     };
+
+    allUser = async (req,res)=>{
+        try {
+            res.send("get method")
+            
+        } catch (e) {
+            return res.status(500).json({
+                status : "fail",
+                msg : e.toString()
+            });
+        }
+    };
 }
 
 const userController = new userClass();
