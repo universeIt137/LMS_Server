@@ -18,7 +18,11 @@ class userClass {
 
     allUser = async (req,res)=>{
         try {
-            res.send("get method")
+            let data = userModel.find()
+            return res.status(200).json({
+                status :"success",
+                data : data
+            })
             
         } catch (e) {
             return res.status(500).json({
