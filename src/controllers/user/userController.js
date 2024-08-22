@@ -1,11 +1,11 @@
 const userModel = require("../../models/userModel");
 
 class userClass {
-    signUp =  (req,res)=>{
+    signUp = async (req,res)=>{
         try {
         let reqBody = req.body;
         console.log(reqBody);
-        let data =  userModel.create(reqBody);
+        let data = await userModel.create(reqBody);
         return res.status(201).json({
             status:"success",
             data : data
