@@ -32,6 +32,22 @@ class userClass {
             });
         }
     };
+
+    updateUser = async (req,res)=>{
+        try {
+            let reqBody = req.body;
+            let id = req.params.id;
+            let filter = { _id : id };
+            let data = await userModel.findByIdAndUpdate(filter,reqBody);
+            return res.status(200).json({
+                status : "success",
+                msg :"update successfully"
+            })
+        } catch (e) {
+            
+        }
+    }
+
 }
 
 const userController = new userClass();
