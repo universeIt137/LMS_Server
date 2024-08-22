@@ -18,6 +18,10 @@ app.get("/",async(req,res)=>{
 
 app.use(cors());
 
+// user routes
+const router = require("./src/routes/userApi");
+app.use("/api/v1",router);
+
 
 
 module.exports = app;
