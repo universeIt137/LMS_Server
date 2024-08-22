@@ -17,8 +17,8 @@ app.get("/",async(req,res)=>{
 
 
 app.use(cors());
-app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 
 // user routes
 const router = require("./src/routes/userApi");
