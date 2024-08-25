@@ -10,6 +10,7 @@ const upload = require("../middlewares/imageMiddleware");
 router.post("/user/sign-up", upload.single("img") ,userController.signUp);
 router.post("/user/sign-in", userController.singIn);
 router.put("/user/update/:id" , userController.updateUser);
+router.get("/user/log-out", userController.handleLogOut);
 
 
 

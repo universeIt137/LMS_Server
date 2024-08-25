@@ -97,8 +97,21 @@ class userClass {
         }
     };
 
-    
-
+    handleLogOut = async (req,res)=>{
+        try {
+            res.clearCookie("accessToken");
+            res.clearCookie("refreshToken");
+            return res.status(200).json({
+                status:"success",
+                msg : "User logout successfully"
+            });
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg : e.toString()
+            });
+        }
+    }
     updateUser = async (req,res)=>{
         try {
             let reqBody = req.body;
