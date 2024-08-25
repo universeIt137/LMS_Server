@@ -76,7 +76,6 @@ class userClass {
                 refreshTokenKey,
                 "7d"
             );
-
             res.cookie("refreshToken", refreshToken,{
                 maxAge : 7*24*60*60*1000,
                 httpOnly : true,
@@ -92,7 +91,7 @@ class userClass {
         } catch (error) {
             return res.status(500).json({
                 status:"fail",
-                msg :  e.toString()
+                msg :  error.toString()
             })
         }
     };
@@ -112,21 +111,31 @@ class userClass {
             });
         }
     }
-    updateUser = async (req,res)=>{
+
+    getSingleUser = async (req, res) => {
         try {
-            let reqBody = req.body;
-            let id = req.params.id;
-            let filter = { _id : id };
-            console.log(id)
-            await userModel.findByIdAndUpdate(filter,reqBody);
-            return res.status(200).json({
-                status : "success",
-                msg :"update successfully"
-            })
-        } catch (e) {
-            
+            let id = req.user._id;
+            let filter = { _id: id };
+            let data = await userModel.findOne(filter); 
+            if (!data) {
+                return res.status(404).json({
+                    status: "fail",
+                    msg: "User not found"
+                });
+            } else {
+                return res.status(200).json({
+                    status: "success",
+                    data: data
+                });
+            }
+        } catch (error) {
+            return res.status(500).json({
+                status: "fail",
+                msg: error.toString()
+            });
         }
-    }
+    };
+    
 
 }
 
