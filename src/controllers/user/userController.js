@@ -37,7 +37,7 @@ class userClass {
             });
         }
     };
-
+    
     singIn = async (req,res)=>{
         try {
             let {email,password} = req.body;
