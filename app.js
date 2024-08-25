@@ -5,8 +5,6 @@ const bodyParser = require("body-parser");
 const { default: mongoose } = require("mongoose");
 require("dotenv").config();
 
-const fileUpload = require('express-fileupload');
-
 const dbPort = process.env.DB_PORT;
 
 mongoose.connect(dbPort).then(()=>{
@@ -27,9 +25,7 @@ app.get("/",async(req,res)=>{
     res.send("Server running");
 })
 
-app.use(fileUpload({
-    useTempFiles : true
-}))
+
 
 // user routes
 const router = require("./src/routes/userApi");
@@ -37,8 +33,8 @@ app.use("/api/v1",router);
 
 // admin route
 
-const adminRoute = require("./src/routes/adminApi");
-app.use("/api/v1", adminRoute )
+// const adminRoute = require("./src/routes/adminApi");
+// app.use("/api/v1", adminRoute )
 
 
 

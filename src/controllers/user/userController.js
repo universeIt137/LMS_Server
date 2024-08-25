@@ -3,7 +3,7 @@ const userModel = require("../../models/userModel");
 class userClass {
     signUp = async (req, res) => {
         try {
-            const { name, email, phone_number, password, img } = req.body;
+            const { name, email, phone_number, password,img } = req.body;
             const userEmail = await userModel.findOne({ email });
             const phoneNumber = await userModel.findOne({ phone_number });
             if (userEmail) {
@@ -26,7 +26,6 @@ class userClass {
             const data = await userModel.create(reqBodyData);
             return res.status(201).json({ status : "success", data : data });
         } catch (e) {
-            // Handle any errors
             return res.status(500).json({
                 status : "fail",
                 msg : e.toString()
