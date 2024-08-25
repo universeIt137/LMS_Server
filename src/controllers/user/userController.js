@@ -4,8 +4,6 @@ class userClass {
     signUp = async (req, res) => {
         try {
             const { name, email, phone_number, password, img } = req.body;
-            
-
             const userEmail = await userModel.findOne({ email });
             const phoneNumber = await userModel.findOne({ phone_number });
             if (userEmail) {
