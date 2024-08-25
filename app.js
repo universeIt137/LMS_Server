@@ -33,8 +33,8 @@ app.use("/api/v1",router);
 
 // admin route
 
-// const adminRoute = require("./src/routes/adminApi");
-// app.use("/api/v1", adminRoute )
+const adminRoute = require("./src/routes/adminRoute");
+app.use("/api/v1", adminRoute )
 
 
 

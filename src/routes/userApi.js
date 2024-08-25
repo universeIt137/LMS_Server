@@ -8,7 +8,7 @@ const userController = require("../controllers/user/userController");
 const upload = require("../middlewares/imageMiddleware");
 
 router.post("/user/sign-up", upload.single("img") ,userController.signUp);
-router.get("/user/all/user", userController.allUser);
+router.post("/user/sign-in", userController.singIn);
 router.put("/user/update/:id" , userController.updateUser);
 
 

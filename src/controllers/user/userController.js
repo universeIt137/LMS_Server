@@ -1,4 +1,9 @@
+require("dotenv");
 const userModel = require("../../models/userModel");
+const bcrypt = require("bcrypt");
+const {createWebToken} = require("../../helper/jsonWebTokenHelper");
+const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
+const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
 
 class userClass {
     signUp = async (req, res) => {
@@ -33,22 +38,66 @@ class userClass {
         }
     };
 
-    allUser = async (req,res)=>{
+    singIn = async (req,res)=>{
         try {
-            let data = await userModel.find();
-            return res.status(200).json({
-                status :"success",
-                data : data
-            })
-            
-        } catch (e) {
-            console.log(e)
-            return res.status(500).json({
+            let {email,password} = req.body;
+            let user = await userModel.findOne({email:email});
+            if(!user) return res.status(404).json({
                 status : "fail",
-                msg : e.toString()
+                msg : "User not exists in this email"
             });
+            let matchPassword = bcrypt.compareSync(password,user.password);
+            if(!matchPassword){
+                return res.status(403).json({
+                    status : "fail",
+                    msg : "password not match"
+                });
+            }
+
+            // crate access token
+
+            let token = createWebToken(
+                {user},
+                accessTokenKey,
+                "1m"
+            );
+
+            res.cookie("accessToken",token,{
+                maxAge : 1*60*1000,
+                httpOnly : true,
+                secure : true,
+                sameSite : "none"
+            });
+
+            // refresh token
+
+            const refreshToken = createWebToken(
+                {user},
+                refreshTokenKey,
+                "7d"
+            );
+
+            res.cookie("refreshToken", refreshToken,{
+                maxAge : 7*24*60*60*1000,
+                httpOnly : true,
+                secure : true,
+                sameSite : "none"
+            });
+
+            return res.status(200).json({
+                status:"success",
+                msg : "User login successfully"
+            });
+
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg :  e.toString()
+            })
         }
     };
+
+    
 
     updateUser = async (req,res)=>{
         try {
