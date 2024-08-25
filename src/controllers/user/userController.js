@@ -1,18 +1,38 @@
 const userModel = require("../../models/userModel");
 
 class userClass {
-    signUp = async (req,res)=>{
+    signUp = async (req, res) => {
         try {
-        let reqBody = req.body;
-        console.log(reqBody);
-        let data = await userModel.create(reqBody);
-        return res.status(201).json({
-            status:"success",
-            data : data
-        })
-        } catch (error) {
-            console.log(error);
+            const { name, email, phone_number, password, img } = req.body;
             
+
+            const userEmail = await userModel.findOne({ email });
+            const phoneNumber = await userModel.findOne({ phone_number });
+            if (userEmail) {
+                return res.status(409).json({ status : "fail", msg : "User email already exists" });
+            }
+            if (phoneNumber) {
+                return res.status(409).json({ status : "fail", msg : "Phone number already exists" });
+            }
+            // Generate a random 6-digit ID
+            const userId = Math.floor(100000 + Math.random() * 900000);
+            let reqBodyData = {
+                name,
+                email,
+                phone_number,
+                password,
+                img,
+                id : userId
+            };
+            // Save the user and return success response
+            const data = await userModel.create(reqBodyData);
+            return res.status(201).json({ status : "success", data : data });
+        } catch (e) {
+            // Handle any errors
+            return res.status(500).json({
+                status : "fail",
+                msg : e.toString()
+            });
         }
     };
 
