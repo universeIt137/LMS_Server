@@ -116,7 +116,8 @@ class userClass {
         try {
             let id = req.user._id;
             let filter = { _id: id };
-            let data = await userModel.findOne(filter); 
+            const notPassword = {  password:0 };
+            let data = await userModel.findOne(filter,notPassword); 
             if (!data) {
                 return res.status(404).json({
                     status: "fail",
