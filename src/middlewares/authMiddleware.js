@@ -7,7 +7,7 @@ const isLogIn = (req, res, next) => {
         if (!token) {
             return res.status(401).json({
                 status: "fail",
-                msg: "Unauthorized, user not logged in"
+                msg: "Unauthorized user"
             });
         }
 
