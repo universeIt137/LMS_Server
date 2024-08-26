@@ -121,12 +121,19 @@ class userClass {
                 refreshToken,
                 refreshTokenKey
             );
+            if(!verifyRefreshToken){
+                return res.status(401).json({
+                    status:"fail",
+                    msg : "Unauthorize user please login"
+                });
+            }
             // create access toekn
             let accessToken = createWebToken(
                 verifyRefreshToken.user,
                 accessTokenKey,
                 "20m"
             );
+
 
             res.cookie("accessToken",accessToken,{
                 maxAge : 20*60*1000,
