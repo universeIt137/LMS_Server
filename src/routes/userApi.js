@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 // user controller 
-const userController = require("../controllers/user/userController");
+const userController = require("../controllers/user/userAuthController");
 // image middleware
 const upload = require("../middlewares/imageMiddleware");
 const { isLogIn, isLogOut } = require("../middlewares/authMiddleware");

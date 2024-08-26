@@ -4,8 +4,9 @@ const router = new express.Router();
 const {isLogIn,isAdmin} = require("../middlewares/authMiddleware")
 
 //adminUser controller
-const adminUserController = require("../controllers/admin/adminController");
+const adminUserController = require("../controllers/admin/adminAuthController");
 
+router.delete("/user/delete/:id", isLogIn, isAdmin, adminUserController.deleteUser);
 router.get("/all-user", isLogIn, isAdmin, adminUserController.allUser);
 
 
