@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const {createWebToken} = require("../../helper/jsonWebTokenHelper");
 const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
+const jwt = require("jsonwebtoken");
 
 class userClass {
     signUp = async (req, res) => {
@@ -112,6 +113,47 @@ class userClass {
             });
         }
     }
+
+    handleRefreshToken = async (req,res)=>{
+        try {
+            let refreshToken = req.cookies.refreshToken;
+            let verifyRefreshToken = jwt.verify(
+                refreshToken,
+                refreshTokenKey
+            );
+            if(!verifyRefreshToken){
+                return res.status(401).json({
+                    status:"fail",
+                    msg : "Unauthorize user please login"
+                });
+            }
+            // create access toekn
+            let accessToken = createWebToken(
+                verifyRefreshToken.user,
+                accessTokenKey,
+                "20m"
+            );
+
+
+            res.cookie("accessToken",accessToken,{
+                maxAge : 20*60*1000,
+                httpOnly : true,
+                secure : true,
+                sameSite : "none"
+            });
+
+            return res.status(200).json({
+                status:"success",
+                msg : "Token created"
+            });
+
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg : error.toString()
+            });
+        }
+    };
 
     getSingleUser = async (req, res) => {
         try {
