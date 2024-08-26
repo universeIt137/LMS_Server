@@ -1,12 +1,14 @@
 const express = require("express");
 
 const router = new express.Router();
-const {isLogIn} = require("../middlewares/authMiddleware")
+const {isLogIn,isAdmin} = require("../middlewares/authMiddleware")
 
 //adminUser controller
 const adminUserController = require("../controllers/admin/adminController");
 
-router.get("/all-user",   )
+router.get("/all-user", isLogIn, isAdmin, adminUserController.allUser);
+
+
 
 
 
