@@ -137,6 +137,38 @@ class userClass {
             });
         }
     };
+
+    updateUser = async (req,res)=>{
+        try {
+            let id = req.user._id;
+            let filter = {_id : id};
+            let {name,email,phone_number,img} = req.body;
+            const update = {
+                name : name,
+                email : email,
+                phone_number : phone_number,
+                img : img
+            }
+            let data = await userModel.findById({_id : id});
+            if(!data){
+                return res.status(404).json({
+                    status:"fail",
+                    msg : "User not found"
+                });
+            }else{
+                let data = await userModel.findByIdAndUpdate(filter,update,{new:true});
+                return res.status(200).json({
+                    status:"success",
+                    data : data
+                })
+            }
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg : error.toString()
+            });
+        }
+    };
     
 
 }

@@ -12,6 +12,7 @@ router.post("/user/sign-up", upload.single("img") ,userController.signUp);
 router.post("/user/sign-in" , isLogOut, userController.singIn);
 router.get("/user/log-out", isLogIn ,userController.handleLogOut);
 router.get("/single/user", isLogIn, userController.getSingleUser);
+router.put("/user/update", isLogIn, userController.updateUser);
 
 
 
