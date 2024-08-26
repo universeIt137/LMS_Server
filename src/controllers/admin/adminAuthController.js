@@ -76,7 +76,7 @@ class adminUserClass {
                 status:"success",
                 msg : error.toString()
             });
-        }
+        };
     }
 }
 
