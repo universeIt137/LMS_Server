@@ -54,16 +54,20 @@ class userClass {
                 });
             }
 
+            console.log(user);
+
             // crate access token
 
             let token = createWebToken(
                 {user},
                 accessTokenKey,
-                "1m"
+                "20m"
             );
 
+            console.log(`token is ${token}`);
+
             res.cookie("accessToken",token,{
-                maxAge : 1*60*1000,
+                maxAge : 20*60*1000,
                 httpOnly : true,
                 secure : true,
                 sameSite : "none"
@@ -76,6 +80,9 @@ class userClass {
                 refreshTokenKey,
                 "7d"
             );
+
+            console.log(`refresh token is ${refreshToken}`)
+
             res.cookie("refreshToken", refreshToken,{
                 maxAge : 7*24*60*60*1000,
                 httpOnly : true,

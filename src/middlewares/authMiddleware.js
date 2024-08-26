@@ -1,31 +1,37 @@
-const { json } = require("body-parser");
 const jwt = require("jsonwebtoken");
 const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 
-const isLogIn = (req,res,next)=>{
+const isLogIn = (req, res, next) => {
     try {
-        let token = req.cookies.accessToken;
-        if(!token){
+        const token = req.cookies.accessToken;
+        console.log(token);
+
+        if (!token) {
             return res.status(401).json({
-                status:"fail",
-                msg : "Unauthorized user"
+                status: "fail",
+                msg: "Unauthorized, user not logged in"
             });
         }
-        let decode = jwt.verify(token,accessTokenKey);
+
+        const decode = jwt.verify(token, accessTokenKey);
+
+        if (!decode) {
+            return res.status(401).json({
+                status: "fail",
+                msg: "Invalid token, please log in"
+            });
+        }
+
         req.user = decode.user;
-        if(!decode){
-            return res.status(401).json({
-                status:"fail",
-                msg : "Invalid token please login"
-            });
-        }
         next();
     } catch (error) {
         return res.status(500).json({
-            msg : error.toString()
+            status: "error",
+            msg: error.message
         });
     }
 };
+
 
 const isLogOut = (req,res,next)=>{
     try {
@@ -67,7 +73,7 @@ const isAdmin = (req,res,next)=>{
     } catch (error) {
         return res.status(500).json({
             status:"fail",
-            msg : e.toString()
+            msg : error.toString()
         })
     }
 };
