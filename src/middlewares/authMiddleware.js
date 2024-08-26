@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const jwt = require("jsonwebtoken");
 const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 
@@ -54,11 +55,22 @@ const isLogOut = (req,res,next)=>{
 
 const isAdmin = (req,res,next)=>{
     try {
-        let admin = req.user.isAdmin
-    } catch (error) {
+        let admin = req.user.isAdmin;
+        if(!admin){
+            return res.status(403).json({
+                status:"fail",
+                msg : "You have not permission"
+            })
+        }
+        next();
         
+    } catch (error) {
+        return res.status(500).json({
+            status:"fail",
+            msg : e.toString()
+        })
     }
 };
 
 
-module.exports = {isLogIn,isLogOut}
+module.exports = {isLogIn,isLogOut,isAdmin};
