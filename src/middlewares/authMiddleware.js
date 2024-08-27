@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
-const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
+
 
 const isLogIn = (req, res, next) => {
     try {
         const token = req.cookies.accessToken;
+
         if (!token) {
             return res.status(401).json({
                 status: "fail",
@@ -11,7 +12,11 @@ const isLogIn = (req, res, next) => {
             });
         }
 
+        const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
+
+        // Verify the token
         const decode = jwt.verify(token, accessTokenKey);
+
 
         if (!decode) {
             return res.status(401).json({
@@ -19,8 +24,8 @@ const isLogIn = (req, res, next) => {
                 msg: "Invalid token, please log in"
             });
         }
-
         req.user = decode.user;
+
         next();
     } catch (error) {
         return res.status(500).json({
@@ -56,9 +61,10 @@ const isLogOut = (req,res,next)=>{
     }
 };
 
-const isAdmin = (req,res,next)=>{
+const isAdminUser = (req,res,next)=>{
     try {
         let admin = req.user.isAdmin;
+        console.log(admin);
         if(!admin){
             return res.status(403).json({
                 status:"fail",
@@ -76,4 +82,4 @@ const isAdmin = (req,res,next)=>{
 };
 
 
-module.exports = {isLogIn,isLogOut,isAdmin};
+module.exports = {isLogIn,isLogOut,isAdminUser};

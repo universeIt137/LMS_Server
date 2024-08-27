@@ -56,6 +56,7 @@ class userClass {
             }
 
             // crate access token
+            const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 
             let token = createWebToken(
                 {user},
@@ -71,6 +72,7 @@ class userClass {
             });
 
             // refresh token
+            const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
 
             const refreshToken = createWebToken(
                 {user},
@@ -91,6 +93,7 @@ class userClass {
             });
 
         } catch (error) {
+            console.log(error);
             return res.status(500).json({
                 status:"fail",
                 msg :  error.toString()
@@ -114,48 +117,53 @@ class userClass {
         }
     }
 
-    handleRefreshToken = async (req,res)=>{
+    handleRefreshToken = async (req, res) => {
+        const refreshTokenKey = process.env.REFRESH_TOKEN_KEY; 
+        const accessTokenKey = process.env.ACCESS_TOKEN_KEY; 
         try {
-            let refreshToken = req.cookies.refreshToken;
-            let verifyRefreshToken = jwt.verify(
-                refreshToken,
-                refreshTokenKey
-            );
-            if(!verifyRefreshToken){
+            const oldToken = req.cookies.refreshToken;
+    
+            // Verify the old refresh token
+            const oldTokenVerify = jwt.verify(oldToken, refreshTokenKey);
+
+    
+            if (!oldTokenVerify) {
                 return res.status(401).json({
-                    status:"fail",
-                    msg : "Unauthorize user please login"
+                    status: "fail",
+                    msg: "Unauthorized user, please login"
                 });
             }
-            // create access toekn
-            let accessToken = createWebToken(
-                verifyRefreshToken.user,
+    
+            // Create a new access token
+            const accessToken = createWebToken(
+                {"user": oldTokenVerify.user },
                 accessTokenKey,
                 "20m"
             );
-
-
-            res.cookie("accessToken",accessToken,{
-                maxAge : 20*60*1000,
-                httpOnly : true,
-                secure : true,
-                sameSite : "none"
+    
+            // Set the new access token in cookies
+            res.cookie("accessToken", accessToken, {
+                maxAge: 20 * 60 * 1000, // 20 minutes
+                httpOnly: true,
+                secure: true,
+                sameSite: "none"
             });
-
+    
             return res.status(200).json({
-                status:"success",
-                msg : "Token created"
+                status: "success",
+                msg: "Token created"
             });
-
+    
         } catch (error) {
             return res.status(500).json({
-                status:"fail",
-                msg : error.toString()
+                status: "fail",
+                msg: error.toString()
             });
         }
     };
 
     getSingleUser = async (req, res) => {
+        
         try {
             let id = req.user._id;
             let filter = { _id: id };
