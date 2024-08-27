@@ -1,12 +1,18 @@
 const express = require("express");
 
 const router = new express.Router();
-const {isLogIn,isAdmin} = require("../middlewares/authMiddleware")
+const {isLogIn,isAdmin} 
+= require("../middlewares/authMiddleware")
 
 //adminUser controller
-const adminUserController = require("../controllers/admin/adminAuthController");
+const adminUserController = 
+require("../controllers/admin/adminAuthController");
 // course controller
-const courseController = require("../controllers/admin/courseController");
+const courseController = 
+require("../controllers/admin/courseController");
+// course details controller
+const courseDetailsController = 
+require("../controllers/admin/courseDetailsController");
 
 
 
@@ -30,6 +36,12 @@ router.delete
 
 router.get
 ("/admin-all-course", isLogIn, isAdmin, courseController.allCourseByAdmin);
+
+// courseDetails related api
+
+router.post
+("/course/details/created", isLogIn, isAdmin, 
+courseDetailsController.courseDetailsCreated);
 
 
 module.exports = router;
