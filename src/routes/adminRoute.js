@@ -40,12 +40,28 @@ router.get
 // courseDetails related api
 
 router.post
-("/course/details/created", isLogIn, isAdmin, 
-courseDetailsController.courseDetailsCreated);
+(
+    "/course/details/created", isLogIn, isAdmin, 
+    courseDetailsController.courseDetailsCreated
+);
 
 router.put
-("/course/details/update/:id", isLogIn, isAdmin,
-courseDetailsController.courseDetailsUpdate);
+(
+    "/course/details/update/:id", isLogIn, isAdmin,
+    courseDetailsController.courseDetailsUpdate
+);
+
+router.delete
+(
+    "/course/details/delete/:id",isLogIn,isAdmin,
+    courseDetailsController.courseDetailsDelete
+);
+
+router.get
+(
+    "/get/all/course-details-admin", isLogIn,isAdmin,
+    courseDetailsController.getAllCourseDetails
+);
 
 
 module.exports = router;
