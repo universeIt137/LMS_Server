@@ -28,5 +28,8 @@ router.put
 router.delete
 ("/course/delete/:id", isLogIn, isAdmin, courseController.courseDelete);
 
+router.get
+("/admin-all-course", isLogIn, isAdmin, courseController.allCourseByAdmin);
+
 
 module.exports = router;
