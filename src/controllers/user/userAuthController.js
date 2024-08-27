@@ -1,4 +1,4 @@
-require("dotenv");
+require("dotenv").config;
 const userModel = require("../../models/userModel");
 const bcrypt = require("bcrypt");
 const {createWebToken} = require("../../helper/jsonWebTokenHelper");
@@ -61,11 +61,11 @@ class userClass {
             let token = createWebToken(
                 {user},
                 accessTokenKey,
-                "20m"
+                "7d"
             );
 
             res.cookie("accessToken",token,{
-                maxAge : 20*60*1000,
+                maxAge : 7*24*60*60*1000,
                 httpOnly : true,
                 secure : true,
                 sameSite : "none"
@@ -77,11 +77,11 @@ class userClass {
             const refreshToken = createWebToken(
                 {user},
                 refreshTokenKey,
-                "7d"
+                "15d"
             );
 
             res.cookie("refreshToken", refreshToken,{
-                maxAge : 7*24*60*60*1000,
+                maxAge : 15*24*60*60*1000,
                 httpOnly : true,
                 secure : true,
                 sameSite : "none"
@@ -93,7 +93,6 @@ class userClass {
             });
 
         } catch (error) {
-            console.log(error);
             return res.status(500).json({
                 status:"fail",
                 msg :  error.toString()
@@ -138,12 +137,12 @@ class userClass {
             const accessToken = createWebToken(
                 {"user": oldTokenVerify.user },
                 accessTokenKey,
-                "20m"
+                "7d"
             );
     
             // Set the new access token in cookies
             res.cookie("accessToken", accessToken, {
-                maxAge: 20 * 60 * 1000, // 20 minutes
+                maxAge: 7*24*60*60*1000, // 7 days
                 httpOnly: true,
                 secure: true,
                 sameSite: "none"

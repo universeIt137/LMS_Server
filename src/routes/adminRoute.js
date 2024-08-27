@@ -25,5 +25,8 @@ router.post
 router.put
 ("/course/update/:id",isLogIn,isAdmin, courseController.courseUpdate);
 
+router.delete
+("/course/delete/:id", isLogIn, isAdmin, courseController.courseDelete);
+
 
 module.exports = router;

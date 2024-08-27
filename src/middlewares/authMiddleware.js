@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
-
+const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 
 const isLogIn = (req, res, next) => {
     try {
         const token = req.cookies.accessToken;
+
 
         if (!token) {
             return res.status(401).json({
@@ -16,7 +17,6 @@ const isLogIn = (req, res, next) => {
 
         // Verify the token
         const decode = jwt.verify(token, accessTokenKey);
-
 
         if (!decode) {
             return res.status(401).json({
@@ -52,7 +52,7 @@ const isLogOut = (req,res,next)=>{
                 });
             }
         }
-        next()
+        next();
     } catch (error) {
         return res.status(500).json({
             status:"fail",
