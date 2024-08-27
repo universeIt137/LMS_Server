@@ -1,6 +1,7 @@
 const courseModel = require("../../models/courseModel");
 
 class courseClass {
+    
     courseCreate = async (req,res)=>{
         try {
             let {course_name,course_img,instructor_name,
