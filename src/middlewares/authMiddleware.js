@@ -61,10 +61,9 @@ const isLogOut = (req,res,next)=>{
     }
 };
 
-const isAdminUser = (req,res,next)=>{
+const isAdmin = (req,res,next)=>{
     try {
         let admin = req.user.isAdmin;
-        console.log(admin);
         if(!admin){
             return res.status(403).json({
                 status:"fail",
@@ -82,4 +81,4 @@ const isAdminUser = (req,res,next)=>{
 };
 
 
-module.exports = {isLogIn,isLogOut,isAdminUser};
+module.exports = {isLogIn,isLogOut,isAdmin};
