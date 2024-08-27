@@ -87,7 +87,7 @@ class courseClass {
     allCourseByAdmin = async (req,res)=>{
         try {
             let data = await courseModel.find();
-            if(!data) return res.status(404).json({
+            if(data.length===0) return res.status(404).json({
                 status:"fail",
                 msg : "Course not found"
             });
