@@ -43,5 +43,9 @@ router.post
 ("/course/details/created", isLogIn, isAdmin, 
 courseDetailsController.courseDetailsCreated);
 
+router.put
+("/course/details/update/:id", isLogIn, isAdmin,
+courseDetailsController.courseDetailsUpdate);
+
 
 module.exports = router;
