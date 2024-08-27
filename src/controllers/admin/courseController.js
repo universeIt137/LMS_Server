@@ -63,6 +63,28 @@ class courseClass {
             });
         }
     };
+    courseDelete = async (req,res)=>{
+        try {
+            let id = req.params.id;
+            let filter = {_id:id};
+            let data = await courseModel.findById({_id : id});
+            if(!data) return res.status(404).json({
+                status:"fail",
+                msg : "Course not found"
+            });
+            await courseModel.findByIdAndDelete(filter);
+            return res.status(200).json({
+                status:"success",
+                msg : "Course delete successfully"
+            });
+        } catch (error) {
+            return res.status({
+                status:"fail",
+                msg : error.toString()
+            });
+        }
+    };
+
 }
 
 const courseController = new courseClass();
