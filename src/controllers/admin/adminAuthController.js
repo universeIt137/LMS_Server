@@ -25,27 +25,35 @@ class adminUserClass {
             });
         }
     };
-    allUser = async (req,res)=>{
+    
+    allUser = async (req, res) => {
         try {
-            let data = await userModel.find();
-            if(!data){
-                return res.status(404).json({
-                    status:"fail",
-                    msg : "Users not found"
-                });
-            }else{
-                return res.status(200).json({
-                    status:"fail",
-                    data : data
-                });
-            }
+            let search = req.params.search || '';
+            let searchRegex = new RegExp(".*" + search + ".*");
+            const notShowPassword = {password:0}
+            const filter = {
+                $or: [
+
+                    { name: { $regex: searchRegex } },
+                    { email: {$regex: searchRegex } }
+                ]
+            };
+            
+            let data = await userModel.find(filter,notShowPassword);
+            return res.status(200).json({
+                status:"success",
+                data : data
+            });
+            
         } catch (error) {
+            console.log(error.toString());
             return res.status(500).json({
                 status:"fail",
-                msg: error.toString()
+                msg : error.toString()
             });
         }
     };
+    
     adminProfileUpdate = async (req,res)=>{
         try {
             let id = req.user._id;
