@@ -22,11 +22,8 @@ router.put
 router.post
 ("/course/create", isLogIn, isAdmin , courseController.courseCreate);
 
-
-
-
-
-
+router.put
+("/course/update/:id",isLogIn,isAdmin, courseController.courseUpdate);
 
 
 module.exports = router;
