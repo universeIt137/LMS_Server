@@ -9,26 +9,28 @@ const jwt = require("jsonwebtoken");
 class userClass {
     signUp = async (req, res) => {
         try {
-            const { name, email, phone_number, password,img } = req.body;
+            const {firstName,lastName, username, email,password,img,confirmPassword } = req.body;
             const userEmail = await userModel.findOne({ email });
-            const phoneNumber = await userModel.findOne({ phone_number });
             if (userEmail) {
                 return res.status(409).json({ status : "fail", msg : "User email already exists" });
             }
-            if (phoneNumber) {
-                return res.status(409).json({ status : "fail", msg : "Phone number already exists" });
-            }
+            if(password!==confirmPassword) return res.status(401).json({
+                status:"fail",
+                msg : "password not match"
+            });
             // Generate a random 6-digit ID
             const userId = Math.floor(100000 + Math.random() * 900000);
             let reqBodyData = {
-                name,
+                firstName,
+                lastName,
                 email,
-                phone_number,
+                username,
                 password,
                 img,
+                confirmPassword,
                 id : userId
             };
-            // Save the user and return success response
+
             const data = await userModel.create(reqBodyData);
             return res.status(201).json({ status : "success", data : data });
         } catch (e) {

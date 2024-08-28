@@ -7,15 +7,19 @@ const signUpSchema = new Schema({
         type : String,
         required : true
     },
-    name : {
+    firstName: {
         type : String,
         required : true
     },
-    email : {
+    lastName : {
+        type : String,
+        required : true
+    },
+    username : {
         type : String,
     },
-    phone_number: {
-        type: Number,
+    email : {
+        type : String,
     },
     password : {
         type : String,
