@@ -13,6 +13,8 @@ require("../controllers/admin/courseController");
 // course details controller
 const courseDetailsController = 
 require("../controllers/admin/courseDetailsController");
+const curriculumController = require("../controllers/admin/curriculumController");
+// curriculum controller
 
 
 
@@ -62,6 +64,16 @@ router.get
     "/get/all/course-details-admin", isLogIn,isAdmin,
     courseDetailsController.getAllCourseDetails
 );
+
+
+// curriculum related api
+
+router.post
+(
+    "/curriculum/create", isLogIn,isAdmin,
+    curriculumController.createCurriculum
+)
+
 
 
 module.exports = router;
