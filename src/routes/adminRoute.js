@@ -72,7 +72,13 @@ router.post
 (
     "/curriculum/create", isLogIn,isAdmin,
     curriculumController.createCurriculum
-)
+);
+
+router.delete
+(
+    "/curriculum/delete/:id", isLogIn,isAdmin,
+    curriculumController.deleteCurriculum
+);
 
 
 
