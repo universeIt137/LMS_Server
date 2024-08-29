@@ -17,6 +17,56 @@ class projectClass {
             });
         }
     };
+
+    updateProject = async (req,res)=>{
+        try {
+            let id = req.params.id;
+            let filter = {_id : id};
+            let reqBody = req.body;
+            let update = reqBody;
+            let data = await projectModel.findById({_id : id});
+            if(!data) return res.status(404).json({
+                status : "fail",
+                msg : "Project data not found"
+            });
+            let updateData = await projectModel.findByIdAndUpdate
+            (filter,update,{new:true});
+            return res.status(200).json({
+                status:"success",
+                msg : "Project data update successfully",
+                data : updateData
+            });
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg : error.toString()
+            });
+        }
+    };
+    deleteProject = async (req,res)=>{
+        try {
+            let id = req.params.id;
+            let filter = {_id : id};
+            let data = await projectModel.findById({_id : id});
+
+            if(!data) return res.status(404).json({
+                status : "fail",
+                msg : "Project data not found"
+            });
+
+            await projectModel.findByIdAndDelete(filter);
+            return res.status(200).json({
+                status:"success",
+                msg : "Project data delete successfully",
+            });
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg : error.toString()
+            });
+        }
+    }
+
 }
 
 const projectController = new projectClass();

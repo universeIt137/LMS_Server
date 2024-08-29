@@ -133,5 +133,17 @@ router.post
     projectController.createProject
 );
 
+router.put
+(
+    "/project/update/:id", isLogIn,isAdmin,
+    projectController.updateProject
+);
+
+router.delete
+(
+    "/project/delete/:id", isLogIn,isAdmin,
+    projectController.deleteProject
+);
+
 
 module.exports = router;
