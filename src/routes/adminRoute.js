@@ -22,6 +22,9 @@ require("../controllers/admin/getInCourseController");
 // project controller
 const projectController =
 require("../controllers/admin/projectController");
+// instructor controller
+const instructorController = 
+require("../controllers/admin/instructorController");
 
 
 
@@ -150,6 +153,14 @@ router.get
     "/get/all/project/admin", isLogIn, isAdmin,
     projectController.getAllProjectByAdmin
 
+)
+
+// instructor related api
+
+router.post
+(
+    "/instructor/create",isLogIn,isAdmin,
+    instructorController.create
 )
 
 
