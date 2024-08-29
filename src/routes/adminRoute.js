@@ -108,6 +108,18 @@ router.put
 (
     "/get/in/course/update/:id", isLogIn, isAdmin,
     getInCourseController.updateGetInCourse
+);
+
+router.delete
+(
+    "/get/in/course/delete/:id", isLogIn, isAdmin,
+    getInCourseController.deleteGetInCourse
+);
+
+router.get
+(
+    "/get/in/course/admin", isLogIn,isAdmin,
+    getInCourseController.allGetInCourseAdmin
 )
 
 
