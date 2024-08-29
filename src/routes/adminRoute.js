@@ -25,6 +25,9 @@ require("../controllers/admin/projectController");
 // instructor controller
 const instructorController = 
 require("../controllers/admin/instructorController");
+//successful student controller 
+const successfulStudentController = 
+require("../controllers/admin/successfulStudentController");
 
 
 
@@ -165,8 +168,28 @@ router.post
 
 router.put
 (
-    "instructor/update/:id",isLogIn,isAdmin,
+    "/instructor/update/:id",isLogIn,isAdmin,
     instructorController.updateInstructor
+);
+
+router.delete
+(
+    "/instructor/delete/:id", isLogIn,isAdmin,
+    instructorController.deleteInstructor
+);
+
+router.get
+(
+    "/all/instructor/admin", isLogIn,isAdmin,
+    instructorController.allInstructorByAdmin
+);
+
+// successful student related api
+
+router.post
+(
+    "/student/create", isLogIn, isAdmin,
+    successfulStudentController.create
 )
 
 
