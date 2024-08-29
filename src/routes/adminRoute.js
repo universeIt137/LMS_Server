@@ -16,9 +16,12 @@ require("../controllers/admin/courseDetailsController");
 // curriculum controller
 const curriculumController = 
 require("../controllers/admin/curriculumController");
-
 // getInCourse controller
-const getInCourseController = require("../controllers/admin/getInCourseController");
+const getInCourseController = 
+require("../controllers/admin/getInCourseController");
+// project controller
+const projectController =
+require("../controllers/admin/projectController");
 
 
 
@@ -122,6 +125,13 @@ router.get
     getInCourseController.allGetInCourseAdmin
 )
 
+// project related api
+
+router.post
+(
+    "/project/create", isLogIn,isAdmin,
+    projectController.createProject
+);
 
 
 module.exports = router;

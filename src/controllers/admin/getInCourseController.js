@@ -56,7 +56,7 @@ class getInCourseClass {
             await getInCourseModel.findByIdAndDelete(filter);
             return res.status(200).json({
                 status:"success",
-                msg : "getInCourse successfully",
+                msg : "getInCourse delete successfully",
             });
         } catch (error) {
             return res.status(500).json({
