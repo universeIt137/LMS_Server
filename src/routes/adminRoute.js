@@ -198,5 +198,11 @@ router.put
     successfulStudentController.update
 );
 
+router.delete
+(
+    "/student/delete/:id", isLogIn,isAdmin,
+    successfulStudentController.successfulStudentDelete
+)
+
 
 module.exports = router;
