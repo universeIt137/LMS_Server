@@ -43,6 +43,28 @@ class successfulStudentClass {
             });
         }
     };
+
+    successfulStudentDelete= async (req,res)=>{
+        try {
+            let id = req.params.id;
+            let filter = {_id : id};
+            let data = await successfulStudentModel.findById({_id:id});
+            if(!data) return res.status(404).json({
+                status:"fail",
+                msg : "student data not found",
+            });
+            await successfulStudentModel.findByIdAndDelete(filter);
+            return res.status(200).json({
+                status:"success",
+                msg : "delete successfully",
+            });
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg : error.toString()
+            });
+        }
+    };
 }
 
 const successfulStudentController = new successfulStudentClass();
