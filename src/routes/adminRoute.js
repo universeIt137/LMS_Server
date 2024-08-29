@@ -161,6 +161,12 @@ router.post
 (
     "/instructor/create",isLogIn,isAdmin,
     instructorController.create
+);
+
+router.put
+(
+    "instructor/update/:id",isLogIn,isAdmin,
+    instructorController.updateInstructor
 )
 
 
