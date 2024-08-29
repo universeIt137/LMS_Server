@@ -133,5 +133,11 @@ router.post
     projectController.createProject
 );
 
+router.put
+(
+    "/project/update/:id", isLogIn,isAdmin,
+    projectController.updateProject
+);
+
 
 module.exports = router;
