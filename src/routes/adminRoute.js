@@ -80,6 +80,18 @@ router.delete
     curriculumController.deleteCurriculum
 );
 
+router.put
+(
+    "/curriculum/update/:id", isLogIn, isAdmin,
+    curriculumController.updateCurriculum
+)
+
+router.get
+(
+    "/all/curriculum/admin", isLogIn, isAdmin,
+    curriculumController.getAllCurriculumByAdmin 
+)
+
 
 
 module.exports = router;
