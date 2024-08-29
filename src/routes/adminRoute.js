@@ -190,7 +190,13 @@ router.post
 (
     "/student/create", isLogIn, isAdmin,
     successfulStudentController.create
-)
+);
+
+router.put
+(
+    "/student/update/:id", isLogIn,isAdmin,
+    successfulStudentController.update
+);
 
 
 module.exports = router;
