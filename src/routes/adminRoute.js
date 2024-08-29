@@ -100,10 +100,15 @@ router.get
 
 router.post
 (
-    "/get/course/create",isLogIn,isAdmin,
+    "/get/in/course/create",isLogIn,isAdmin,
     getInCourseController.create
 );
 
+router.put
+(
+    "/get/in/course/update/:id", isLogIn, isAdmin,
+    getInCourseController.updateGetInCourse
+)
 
 
 
