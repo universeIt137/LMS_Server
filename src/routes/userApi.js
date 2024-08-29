@@ -9,11 +9,17 @@ const upload = require("../middlewares/imageMiddleware");
 //middleware
 const { isLogIn, isLogOut } = require("../middlewares/authMiddleware");
 //course controller
-const courseController = require("../controllers/user/courseController");
+const courseController = 
+require("../controllers/user/courseController");
 //course details controller
-const courseDetailsController = require("../controllers/user/courseDetailsController");
-const curriculumController = require("../controllers/user/curriculumController");
+const courseDetailsController = 
+require("../controllers/user/courseDetailsController");
 //curriculum controller
+const curriculumController = 
+require("../controllers/user/curriculumController");
+// getInCourse controller
+const getInCourseController = require("../controllers/user/getInCourseController");
+
 
 // auth related api
 
@@ -41,6 +47,13 @@ router.get
 (
     "/all/curriculum", curriculumController.getAllCurriculum
 )
+
+// get in course controller
+
+router.get
+(
+    "/get/in/all/course", getInCourseController.allGetInCourse
+);
 
 
 
