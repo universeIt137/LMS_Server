@@ -37,6 +37,53 @@ class curriculumClass {
             })
         }
     };
+
+    updateCurriculum = async (req,res)=>{
+        try {
+            let id = req.params.id;
+            let reqBody = req.body;
+            let update = reqBody;
+            let filter = { _id : id };
+            let data = await curriculumModel.findById({_id:id});
+            if(!data) return res.status(404).json({
+                status:"fail",
+                msg : "Curriculum not found"
+            });
+            let updateData = await curriculumModel.findByIdAndUpdate
+            (filter,update,{new:true});
+
+            return res.status(200).json({
+                status:"success",
+                msg : "Curriculum update successfully",
+                data : updateData
+            });
+
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg : error.toString()
+            });
+        }
+    };
+
+    getAllCurriculumByAdmin = async (req,res)=>{
+        try {
+            let data = await curriculumModel.find();
+            if(data.length===0) return res.status(404).json({
+                status:"fail",
+                msg : "Curriculum not found"
+            });
+            return res.status(200).json({
+                status : "success",
+                data : data
+            });
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg : error.toString()
+            });
+        }
+    };
 }
 
 let curriculumController = new curriculumClass();
