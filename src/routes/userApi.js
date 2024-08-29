@@ -12,6 +12,8 @@ const { isLogIn, isLogOut } = require("../middlewares/authMiddleware");
 const courseController = require("../controllers/user/courseController");
 //course details controller
 const courseDetailsController = require("../controllers/user/courseDetailsController");
+const curriculumController = require("../controllers/user/curriculumController");
+//curriculum controller
 
 // auth related api
 
@@ -33,6 +35,12 @@ router.get
     "/get-all-course-details", courseDetailsController.getAllCourseDetails
 )
 
+// curriculum related api
+
+router.get
+(
+    "/all/curriculum", curriculumController.getAllCurriculum
+)
 
 
 
