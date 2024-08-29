@@ -13,8 +13,12 @@ require("../controllers/admin/courseController");
 // course details controller
 const courseDetailsController = 
 require("../controllers/admin/courseDetailsController");
-const curriculumController = require("../controllers/admin/curriculumController");
 // curriculum controller
+const curriculumController = 
+require("../controllers/admin/curriculumController");
+
+// getInCourse controller
+const getInCourseController = require("../controllers/admin/getInCourseController");
 
 
 
@@ -84,13 +88,22 @@ router.put
 (
     "/curriculum/update/:id", isLogIn, isAdmin,
     curriculumController.updateCurriculum
-)
+);
 
 router.get
 (
     "/all/curriculum/admin", isLogIn, isAdmin,
     curriculumController.getAllCurriculumByAdmin 
-)
+);
+
+// getInCourse related api
+
+router.post
+(
+    "/get/course/create",isLogIn,isAdmin,
+    getInCourseController.create
+);
+
 
 
 
