@@ -7,7 +7,8 @@ const userController = require("../controllers/user/userAuthController");
 // image middleware
 const upload = require("../middlewares/imageMiddleware");
 //middleware
-const { isLogIn, isLogOut } = require("../middlewares/authMiddleware");
+const { isLogIn, isLogOut } = 
+require("../middlewares/authMiddleware");
 //course controller
 const courseController = 
 require("../controllers/user/courseController");
@@ -18,7 +19,11 @@ require("../controllers/user/courseDetailsController");
 const curriculumController = 
 require("../controllers/user/curriculumController");
 // getInCourse controller
-const getInCourseController = require("../controllers/user/getInCourseController");
+const getInCourseController = 
+require("../controllers/user/getInCourseController");
+//project controller
+const projectController =
+require("../controllers/user/projectController")
 
 
 // auth related api
@@ -55,6 +60,12 @@ router.get
     "/get/in/all/course", getInCourseController.allGetInCourse
 );
 
+// project relatedapi
+
+router.get
+(
+    "/get/all/project",projectController.getAllProject
+);
 
 
 module.exports = router;
