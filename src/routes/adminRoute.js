@@ -145,5 +145,12 @@ router.delete
     projectController.deleteProject
 );
 
+router.get
+(
+    "/get/all/project/admin", isLogIn, isAdmin,
+    projectController.getAllProjectByAdmin
+
+)
+
 
 module.exports = router;
