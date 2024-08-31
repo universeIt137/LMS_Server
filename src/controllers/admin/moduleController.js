@@ -82,6 +82,11 @@ class moduleClass {
         let data = await moduleService.getAllModuleService();
         res.send(data);
     };
+
+    getSingleModuleByAdmin = async (req,res)=>{
+        let data = await moduleService.getSingleModuleService(req);
+        res.send(data);
+    }
 }
 
 const moduleController = new moduleClass();

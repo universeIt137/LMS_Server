@@ -292,6 +292,12 @@ router.get
     moduleController.getAllModuleByAdmin
 );
 
+router.get
+(
+    "/get/single/module/:id",isLogIn,isAdmin,
+    moduleController.getSingleModuleByAdmin
+);
+
 
 
 // assignment related api

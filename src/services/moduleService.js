@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const moduleModel = require("../models/moduleModel");
 
 class moduleServicesClass {
@@ -40,6 +41,56 @@ class moduleServicesClass {
             return {
                 status: "success",
                 msg: "Found all module data",
+                data: data
+            };
+            } catch (error) {
+            return {
+                status: "fail",
+                msg: error.toString()
+            };
+            }
+    };
+
+    getSingleModuleService = async (req) => {
+        try {
+            const id = new mongoose.Types.ObjectId(req.params.id);
+        
+            const matchStage = { $match: { _id: id } };
+        
+            const joinWithCourseId = {
+                $lookup: {
+                from: "courses",
+                localField: "course_id",
+                foreignField: "_id",
+                as: "data"
+                }
+            };
+        
+            const unwindData = { $unwind: "$data" };
+        
+            let projection = {
+                $project: {
+                "updatedAt": 0,
+                "data._id": 0,
+                "data.course_img": 0,
+                "data.instructor_name": 0,
+                "data.instructor_img": 0,
+                "data.total_sit": 0,
+                "data.createdAt": 0,
+                "data.updatedAt": 0
+                }
+            };
+        
+            const data = await moduleModel.aggregate([
+                matchStage,
+                joinWithCourseId,
+                unwindData,
+                projection
+            ]);
+        
+            return {
+                status: "success",
+                msg: "Found single module data",
                 data: data
             };
             } catch (error) {
