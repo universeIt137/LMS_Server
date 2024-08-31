@@ -288,4 +288,10 @@ router.put
     moduleController.moduleUpdate
 );
 
+router.delete
+(
+    "/module/delete/:id", isLogIn, isAdmin,
+    moduleController.moduleDelete
+)
+
 module.exports = router;

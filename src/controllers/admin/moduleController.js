@@ -1,4 +1,7 @@
+const { mongo, default: mongoose } = require("mongoose");
 const moduleModel = require("../../models/moduleModel");
+const checkAssociate = require("../../services/checkAssociate");
+const moduleDetailsModel = require("../../models/moduleDetailsModel");
 
 class moduleClass {
     moduleCreate = async (req,res)=>{
@@ -45,7 +48,34 @@ class moduleClass {
         }
     };
 
-    
+    moduleDelete = async (req,res)=>{
+        try {
+            let id = new mongoose.Types.ObjectId(req.params.id);
+            let data = await moduleModel.findById({_id : id});
+            if(!data) return res.status(404).json({
+                status:"fail",
+                msg : "module data not found"
+            });
+            let checkData = await checkAssociate({_id : id},moduleDetailsModel);
+            if(checkData){
+                return res.status(400).json({
+                    status:"fail",
+                    msg : "Associate with module details"
+                });
+            }else {
+                await moduleModel.findByIdAndDelete(filter);
+                return res.status(200).json({
+                    status:"success",
+                    msg : "Module data delete successfully",
+                });
+            }
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg : error.toString()
+            });
+        }
+    }
 }
 
 const moduleController = new moduleClass();
