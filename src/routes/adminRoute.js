@@ -34,6 +34,9 @@ require("../controllers/admin/feedbackController.js");
 //assignment controller
 const assignmentController = 
 require("../controllers/admin/assignmentController.js");
+//module controller
+const moduleController = 
+require("../controllers/admin/moduleController.js");
 
 
 
@@ -263,12 +266,26 @@ router.get
     feedbackController.allFeedbackByAdmin
 );
 
+// module related api
+
+router.post
+(
+    "/module/create", isLogIn,isAdmin,
+    moduleController.moduleCreate
+);
+
 // assignment related api
 
 router.post
 (
     "/assignment/create", isLogIn,isAdmin,
     assignmentController.assignmentPost
+);
+
+router.put
+(
+    "/module/update/:id",isLogIn,isAdmin,
+    moduleController.moduleUpdate
 );
 
 module.exports = router;
