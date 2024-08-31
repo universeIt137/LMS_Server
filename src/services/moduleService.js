@@ -37,17 +37,23 @@ class moduleServicesClass {
                 unwindData,
                 projection
             ]);
-        
-            return {
-                status: "success",
-                msg: "Found all module data",
-                data: data
-            };
+
+            if(data.length===0){
+                return {
+                    status:"fail",
+                    dat : data
+                };
+            }
+                return {
+                    status: "success",
+                    msg: "Found all module data",
+                    data: data
+                };
             } catch (error) {
-            return {
-                status: "fail",
-                msg: error.toString()
-            };
+                return {
+                    status: "fail",
+                    msg: error.toString()
+                };
             }
     };
 
@@ -87,7 +93,13 @@ class moduleServicesClass {
                 unwindData,
                 projection
             ]);
-        
+
+            if(data.length===0){
+                return {
+                    status:"fail",
+                    msg : "Module not found"
+                }
+            }
             return {
                 status: "success",
                 msg: "Found single module data",
@@ -99,7 +111,7 @@ class moduleServicesClass {
                 msg: error.toString()
             };
             }
-        };
+    };
         
 }
 
