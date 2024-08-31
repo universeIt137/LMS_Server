@@ -28,6 +28,9 @@ require("../controllers/admin/instructorController");
 //successful student controller 
 const successfulStudentController = 
 require("../controllers/admin/successfulStudentController");
+//feedback controller
+const feedbackController = 
+require("../controllers/admin/feedbackController.js");
 
 
 
@@ -208,6 +211,14 @@ router.get
 (
     "/all-successful-student/admin", isLogIn,isAdmin,
     successfulStudentController.allSuccessfulStudentByAdmin
+);
+
+// feedback related api
+
+router.post
+(
+    "/feedback/create" , isLogIn, isAdmin,
+    feedbackController.createFeedback
 );
 
 
