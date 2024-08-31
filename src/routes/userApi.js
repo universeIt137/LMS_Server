@@ -27,6 +27,8 @@ require("../controllers/user/projectController");
 // course successful student controller
 const courseSuccessfulStudentController = 
 require("../controllers/user/courseSuccessfulStudentController");
+//feedback controller
+const feedbackController = require("../controllers/user/feedbackController");
 
 
 // auth related api
@@ -76,6 +78,13 @@ router.get
 (
     "/course/successful/student",
     courseSuccessfulStudentController.allSuccessfulStudent
+);
+
+// feedback api
+
+router.get
+(
+    "/all-feedback",feedbackController.allFeedback
 );
 
 module.exports = router;

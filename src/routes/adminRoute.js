@@ -31,29 +31,53 @@ require("../controllers/admin/successfulStudentController");
 //feedback controller
 const feedbackController = 
 require("../controllers/admin/feedbackController.js");
+//assignment controller
+const assignmentController = 
+require("../controllers/admin/assignmentController.js");
 
 
 
+///auth api
 router.delete
-("/user/delete/:id", isLogIn, isAdmin,adminUserController.deleteUser);
-router.get("/all-user/", isLogIn, isAdmin, adminUserController.allUser);
+(
+    "/user/delete/:id", isLogIn, isAdmin,
+    adminUserController.deleteUser
+);
+router.get(
+    "/all-user/", isLogIn, isAdmin, 
+    adminUserController.allUser
+);
 router.put
-("/admin/update", isLogIn,isAdmin,adminUserController.adminProfileUpdate);
+(
+    "/admin/update", isLogIn,isAdmin,
+    adminUserController.adminProfileUpdate
+);
 
 
 // course related api
 
 router.post
-("/course/create", isLogIn, isAdmin , courseController.courseCreate);
+("/course/create", isLogIn, isAdmin ,
+    courseController.courseCreate
+);
 
 router.put
-("/course/update/:id",isLogIn,isAdmin, courseController.courseUpdate);
+(
+    "/course/update/:id",isLogIn,isAdmin,
+    courseController.courseUpdate
+);
 
 router.delete
-("/course/delete/:id", isLogIn, isAdmin, courseController.courseDelete);
+(
+    "/course/delete/:id", isLogIn, isAdmin,
+    courseController.courseDelete
+);
 
 router.get
-("/admin-all-course", isLogIn, isAdmin, courseController.allCourseByAdmin);
+(
+    "/admin-all-course", isLogIn, isAdmin, 
+    courseController.allCourseByAdmin
+);
 
 // courseDetails related api
 
@@ -239,5 +263,12 @@ router.get
     feedbackController.allFeedbackByAdmin
 );
 
+// assignment related api
+
+router.post
+(
+    "/assignment/create", isLogIn,isAdmin,
+    assignmentController.assignmentPost
+);
 
 module.exports = router;
