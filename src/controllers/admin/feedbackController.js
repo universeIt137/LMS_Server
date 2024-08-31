@@ -1,6 +1,6 @@
 const feedbackModel = require("../../models/learnerFeedbackModel");
 
-const feedbackService = require("../../services/feedbackService.js")
+const feedbackService = require("../../services/feedbackService.js");
 
 class feedbackClass {
     createFeedback = async (req,res)=>{

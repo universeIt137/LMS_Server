@@ -23,10 +23,12 @@ class successfulStudentClass {
     update = async (req,res)=>{
         try {
             let id = req.params.id;
+            console.log(id)
             let filter = {_id : id};
             let reqBody = req.body;
             let update = reqBody;
             let data = await successfulStudentModel.findById({_id:id});
+            console.log(data);
             if(!data) return res.status(404).json({
                 status:"fail",
                 msg : "student data not found",
