@@ -63,7 +63,7 @@ class moduleClass {
                     msg : "Associate with module details"
                 });
             }else {
-                await moduleModel.findByIdAndDelete(filter);
+                await moduleModel.findByIdAndDelete({_id : id});
                 return res.status(200).json({
                     status:"success",
                     msg : "Module data delete successfully",
