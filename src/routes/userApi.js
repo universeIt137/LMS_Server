@@ -23,7 +23,10 @@ const getInCourseController =
 require("../controllers/user/getInCourseController");
 //project controller
 const projectController =
-require("../controllers/user/projectController")
+require("../controllers/user/projectController");
+// course successful student controller
+const courseSuccessfulStudentController = 
+require("../controllers/user/courseSuccessfulStudentController");
 
 
 // auth related api
@@ -60,12 +63,19 @@ router.get
     "/get/in/all/course", getInCourseController.allGetInCourse
 );
 
-// project relatedapi
+// project related api
 
 router.get
 (
     "/get/all/project",projectController.getAllProject
 );
 
+// course successful student api
+
+router.get
+(
+    "/course/successful/student",
+    courseSuccessfulStudentController.allSuccessfulStudent
+);
 
 module.exports = router;
