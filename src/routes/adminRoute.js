@@ -225,7 +225,19 @@ router.put
 (
     "/feedback/update/:id" , isLogIn,isAdmin,
     feedbackController.updateFeedback
-)
+);
+
+router.delete
+(
+    "/feedback/delete/:id", isLogIn,isAdmin,
+    feedbackController.deleteFeedback
+);
+
+router.get
+(
+    "/all-feedback/admin", isLogIn,isAdmin,
+    feedbackController.allFeedbackByAdmin
+);
 
 
 module.exports = router;
