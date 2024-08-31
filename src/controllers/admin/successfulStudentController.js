@@ -65,6 +65,26 @@ class successfulStudentClass {
             });
         }
     };
+
+    allSuccessfulStudentByAdmin = async (req,res)=>{
+        try {
+            let data = await successfulStudentModel.find();
+            if(data.length===0) return res.status(404).json({
+                status:"fail",
+                msg : "Successful student data not found"
+            });
+            return res.status(200).json({
+                status:"success",
+                msg : "All successful student data found",
+                data : data
+            })
+        } catch (error) {
+            return res.status(500).json({
+                status:"fail",
+                msg : error.toString()
+            });
+        }
+    };
 }
 
 const successfulStudentController = new successfulStudentClass();
