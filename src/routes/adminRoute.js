@@ -274,14 +274,6 @@ router.post
     moduleController.moduleCreate
 );
 
-// assignment related api
-
-router.post
-(
-    "/assignment/create", isLogIn,isAdmin,
-    assignmentController.assignmentPost
-);
-
 router.put
 (
     "/module/update/:id",isLogIn,isAdmin,
@@ -292,6 +284,30 @@ router.delete
 (
     "/module/delete/:id", isLogIn, isAdmin,
     moduleController.moduleDelete
-)
+);
+
+router.get
+(
+    "/get-all-module/admin", isLogIn,isAdmin,
+    moduleController.getAllModuleByAdmin
+);
+
+router.get
+(
+    "/get/single/module/:id",isLogIn,isAdmin,
+    moduleController.getSingleModuleByAdmin
+);
+
+
+
+// assignment related api
+
+router.post
+(
+    "/assignment/create", isLogIn,isAdmin,
+    assignmentController.assignmentPost
+);
+
+
 
 module.exports = router;

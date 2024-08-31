@@ -2,6 +2,7 @@ const { mongo, default: mongoose } = require("mongoose");
 const moduleModel = require("../../models/moduleModel");
 const checkAssociate = require("../../services/checkAssociate");
 const moduleDetailsModel = require("../../models/moduleDetailsModel");
+const moduleService = require("../../services/moduleService");
 
 class moduleClass {
     moduleCreate = async (req,res)=>{
@@ -75,6 +76,16 @@ class moduleClass {
                 msg : error.toString()
             });
         }
+    }
+
+    getAllModuleByAdmin = async (req,res)=>{
+        let data = await moduleService.getAllModuleService();
+        res.send(data);
+    };
+
+    getSingleModuleByAdmin = async (req,res)=>{
+        let data = await moduleService.getSingleModuleService(req);
+        res.send(data);
     }
 }
 
