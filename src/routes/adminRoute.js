@@ -221,5 +221,11 @@ router.post
     feedbackController.createFeedback
 );
 
+router.put
+(
+    "/feedback/update/:id" , isLogIn,isAdmin,
+    feedbackController.updateFeedback
+)
+
 
 module.exports = router;

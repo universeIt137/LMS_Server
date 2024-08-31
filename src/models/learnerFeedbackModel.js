@@ -17,6 +17,6 @@ const lernerFeedbackSchema = new Schema({
     versionKey:false
 });
 
-const lernerFeedbackModel = model("lernerFeedback", lernerFeedbackSchema );
+const lernerFeedbackModel = model("lerner-Feedback", lernerFeedbackSchema );
 
 module.exports = lernerFeedbackModel;
