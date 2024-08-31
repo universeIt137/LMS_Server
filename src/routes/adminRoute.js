@@ -202,7 +202,13 @@ router.delete
 (
     "/student/delete/:id", isLogIn,isAdmin,
     successfulStudentController.successfulStudentDelete
-)
+);
+
+router.get
+(
+    "/all-successful-student/admin", isLogIn,isAdmin,
+    successfulStudentController.allSuccessfulStudentByAdmin
+);
 
 
 module.exports = router;
