@@ -37,6 +37,9 @@ require("../controllers/admin/assignmentController.js");
 //module controller
 const moduleController = 
 require("../controllers/admin/moduleController.js");
+//moduleDetails controller
+const moduleDetailsController = 
+require("../controllers/admin/moduleDetailsController.js");
 
 
 
@@ -323,6 +326,14 @@ router.delete
 router.get(
     "/all-assignment/admin", isLogIn,isAdmin,
     assignmentController.allAssignmentByAdmin
+);
+
+// module details api
+
+router.post
+(
+    "/module-details/create", isLogIn, isAdmin,
+    moduleDetailsController.create
 );
 
 
