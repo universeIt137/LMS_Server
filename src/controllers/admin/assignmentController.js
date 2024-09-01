@@ -1,4 +1,5 @@
 const assignmentModel = require("../../models/assignmentModel");
+const assignmentService = require("../../services/assignmentService");
 
 class assignmentClass {
     assignmentPost = async (req,res)=>{
@@ -74,9 +75,9 @@ class assignmentClass {
     };
     
     allAssignmentByAdmin = async (req,res)=>{
-        
-    }
-    
+        let data = await assignmentService.getAllAssignmentService();
+        res.send(data);
+    };
 
 }
 
