@@ -320,6 +320,10 @@ router.delete
     assignmentController.assignmentDelete
 );
 
+router.get(
+    "/all-assignment/admin", isLogIn,isAdmin,
+    assignmentController.allAssignmentByAdmin
+);
 
 
 module.exports = router;
