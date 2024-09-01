@@ -40,7 +40,9 @@ require("../controllers/admin/moduleController.js");
 //moduleDetails controller
 const moduleDetailsController = 
 require("../controllers/admin/moduleDetailsController.js");
-
+// resource controller
+const resourceController = 
+require("../controllers/admin/resoruceController.js");
 
 
 ///auth api
@@ -335,6 +337,16 @@ router.post
     "/module-details/create", isLogIn, isAdmin,
     moduleDetailsController.create
 );
+
+
+// resource api 
+
+router.post
+(
+    "/resource/create", isLogIn,isAdmin,
+    resourceController.create
+);
+
 
 
 module.exports = router;
