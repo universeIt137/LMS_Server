@@ -308,6 +308,18 @@ router.post
     assignmentController.assignmentPost
 );
 
+router.put
+(
+    "/assignment/update/:id", isLogIn,isAdmin,
+    assignmentController.assignmentUpdate
+);
+
+router.delete
+(
+    "/assignment/delete/:id", isLogIn,isAdmin,
+    assignmentController.assignmentDelete
+);
+
 
 
 module.exports = router;

@@ -35,7 +35,7 @@ class assignmentClass {
             return res.status(200).json({
                 status:"success",
                 msg : "Assignment update successfully",
-                data : data
+                data : updateData
             });
         } catch (error) {
             return res.status(500).json({
@@ -43,7 +43,41 @@ class assignmentClass {
                 msg : error.toString()
             });
         }
+    };
+
+    assignmentDelete = async (req, res) => {
+        try {
+            let id = req.params.id;
+            
+            // Check if the assignment exists
+            let data = await assignmentModel.findById(id);
+            if (!data) {
+                return res.status(404).json({
+                    status: "fail",
+                    msg: "Assignment not found"
+                });
+            }
+    
+            // If assignment exists, proceed to delete
+            await assignmentModel.findByIdAndDelete(id);
+            return res.status(200).json({
+                status: "success",
+                msg: "Assignment deleted successfully"
+            });
+    
+        } catch (error) {
+            return res.status(500).json({
+                status: "fail",
+                msg: error.toString()
+            });
+        }
+    };
+    
+    allAssignmentByAdmin = async (req,res)=>{
+        
     }
+    
+
 }
 
 const assignmentController = new assignmentClass();
