@@ -43,6 +43,12 @@ require("../controllers/admin/moduleDetailsController.js");
 // resource controller
 const resourceController = 
 require("../controllers/admin/resoruceController.js");
+// preRecorde video  controller
+const preRecordVideoController = 
+require("../controllers/admin/proRecordVideoController.js");
+// live class controller
+const liveClassController = require("../controllers/admin/liveClassController.js")
+
 
 
 ///auth api
@@ -347,6 +353,22 @@ router.post
     resourceController.create
 );
 
+// pre recorde video api
+
+router.post
+(
+    "/upload/video", isLogIn,isAdmin,
+    preRecordVideoController.create
+);
+
+
+// live class api
+
+router.post
+(
+    "/live-class/create", isLogIn,isAdmin,
+    liveClassController.create
+)
 
 
 module.exports = router;
