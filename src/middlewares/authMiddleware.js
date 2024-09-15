@@ -3,7 +3,6 @@ const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 
 const isLogIn = (req, res, next) => {
     try {
-        // const token = req.cookies.accessToken;
         let token =  req.headers.authorization;
         if(!token){
             token = req.cookies.accessToken
@@ -28,11 +27,15 @@ const isLogIn = (req, res, next) => {
                 msg: "Invalid token, please log in"
             });
         }
+
+        
         
         let _id = decode.user._id;
         req.headers._id = _id;
         let email = decode.user.email;
         req.headers.email = email;
+        let isAdmin = decode.user.isAdmin;
+        req.headers.isAdmin = isAdmin;
         
 
         next();
@@ -72,7 +75,7 @@ const isLogOut = (req,res,next)=>{
 
 const isAdmin = (req,res,next)=>{
     try {
-        let admin = req.user.isAdmin;
+        let admin = req.headers.isAdmin;
         if(!admin){
             return res.status(403).json({
                 status:"fail",
