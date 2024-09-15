@@ -3,8 +3,11 @@ const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 
 const isLogIn = (req, res, next) => {
     try {
-        const token = req.cookies.accessToken;
-
+        // const token = req.cookies.accessToken;
+        let token =  req.headers.authorization;
+        if(!token){
+            token = req.cookies.accessToken
+        }
 
         if (!token) {
             return res.status(401).json({
@@ -16,6 +19,7 @@ const isLogIn = (req, res, next) => {
         const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 
         // Verify the token
+
         const decode = jwt.verify(token, accessTokenKey);
 
         if (!decode) {
@@ -24,7 +28,8 @@ const isLogIn = (req, res, next) => {
                 msg: "Invalid token, please log in"
             });
         }
-        req.user = decode.user;
+        let user = decode["user"]
+        req.headers.user = user;
 
         next();
     } catch (error) {
@@ -37,9 +42,9 @@ const isLogIn = (req, res, next) => {
 
 const isLogOut = (req,res,next)=>{
     try {
-        let accessToken = req.cookies.accessToken;
-        if(accessToken){
-            let decode = jwt.verify(accessToken,accessTokenKey);
+        let token =  req.headers.authorization;
+        if(token){
+            let decode = jwt.verify(token,accessTokenKey);
             if(decode){
                 return res.status(409).json({
                     status:"fail",
