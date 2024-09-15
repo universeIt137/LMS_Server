@@ -28,8 +28,12 @@ const isLogIn = (req, res, next) => {
                 msg: "Invalid token, please log in"
             });
         }
-        let user = decode["user"]
-        req.headers.user = user;
+        
+        let _id = decode.user._id;
+        req.headers._id = _id;
+        let email = decode.user.email;
+        req.headers.email = email;
+        
 
         next();
     } catch (error) {
