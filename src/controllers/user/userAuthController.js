@@ -167,7 +167,7 @@ class userClass {
     getSingleUser = async (req, res) => {
         
         try {
-            let id = req.user._id;
+            let id = req.headers["_id"];
             let filter = { _id: id };
             const notPassword = {  password:0 };
             let data = await userModel.findOne(filter,notPassword); 
