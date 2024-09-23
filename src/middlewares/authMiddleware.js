@@ -34,11 +34,10 @@ const isLogIn = (req, res, next) => {
         req.headers._id = _id;
         let email = decode.user.email;
         req.headers.email = email;
-        let isAdmin = decode.user.isAdmin;
-        req.headers.isAdmin = isAdmin;
-        
-
+        let role = decode.user.role;
+        req.headers.role = role;
         next();
+
     } catch (error) {
         return res.status(500).json({
             status: "error",
@@ -75,8 +74,8 @@ const isLogOut = (req,res,next)=>{
 
 const isAdmin = (req,res,next)=>{
     try {
-        let admin = req.headers.isAdmin;
-        if(!admin){
+        let role = req.headers.role;
+        if(role!=="admin"){
             return res.status(403).json({
                 status:"fail",
                 msg : "You have not permission"

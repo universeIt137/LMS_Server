@@ -66,6 +66,8 @@ class userClass {
                 "7d"
             );
 
+            
+
             res.cookie("accessToken",token,{
                 maxAge : 7*24*60*60*1000,
                 httpOnly : true,
@@ -102,6 +104,8 @@ class userClass {
             })
         }
     };
+
+    
 
     handleLogOut = async (req,res)=>{
         try {
@@ -164,7 +168,7 @@ class userClass {
         }
     };
 
-    getSingleUser = async (req, res) => {
+    getUserProfile = async (req, res) => {
         
         try {
             let id = req.headers["_id"];
@@ -190,9 +194,9 @@ class userClass {
         }
     };
 
-    updateUser = async (req,res)=>{
+    updateUserProfile = async (req,res)=>{
         try {
-            let id = req.user._id;
+            let id = req.headers["_id"];
             let filter = {_id : id};
             let {name,email,phone_number,img} = req.body;
             const update = {

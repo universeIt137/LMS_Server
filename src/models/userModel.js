@@ -29,9 +29,10 @@ const signUpSchema = new Schema({
     img : {
         type : String,
     },
-    isAdmin : {
-        type : Boolean,
-        default : false
+    role : {
+        type : String,
+        default : "student",
+        enum : ["student", "instructor", "admin"]
     }
 
 },{timestamps:true,versionKey:false});
