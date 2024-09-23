@@ -5,12 +5,7 @@ const cludHelper = require("../../helper/cloudinaryHelper");
 class courseClass {
   courseCreate = async (req, res) => {
     try {
-      let {
-        course_name,
-        instructor_name,
-        total_sit,
-        batch_no,
-      } = req.body;
+      let { course_name, instructor_name, total_sit, batch_no } = req.body;
 
       let courseImg = "";
 
@@ -46,24 +41,31 @@ class courseClass {
   courseUpdate = async (req, res) => {
     try {
       let id = req.params.id;
-      let {
+
+      let { course_name, instructor_name, total_sit, batch_no } = req.body;
+
+      let filter = { _id: id };
+
+
+      let courseImg = "";
+
+      if (req.file) {
+        const result = await cludHelper.uploader.upload(req.file.path, {
+          folder: "course-images",
+        });
+        courseImg = result.secure_url;
+      }
+
+      let courseUpdateData = {
         course_name,
-        course_img,
+        course_img: courseImg,
         instructor_name,
-        instructor_img,
         total_sit,
         batch_no,
-      } = req.body;
-      let courseData = {
-        course_name: course_name,
-        course_img: course_img,
-        instructor_name: instructor_name,
-        instructor_img: instructor_img,
-        total_sit: total_sit,
-        batch_no: batch_no,
       };
-      let filter = { _id: id };
-      let update = courseData;
+
+      const update = courseUpdateData;
+
       let data = await courseModel.findById({ _id: id });
       if (!data)
         return res.status(404).json({
@@ -76,6 +78,7 @@ class courseClass {
 
       return res.status(200).json({
         status: "success",
+        msg: "Course updated successfully",
         data: updateData,
       });
     } catch (error) {

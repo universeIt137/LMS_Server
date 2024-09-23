@@ -81,8 +81,8 @@ router.post
 
 router.put
 (
-    "/course/update/:id",isLogIn,isAdmin,
-    courseController.courseUpdate
+    "/course/update/:id",
+    upload.single("course_img"),isLogIn,isAdmin,courseController.courseUpdate
 );
 
 router.delete
