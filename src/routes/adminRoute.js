@@ -74,8 +74,9 @@ router.put
 // course related api
 
 router.post
-("/course/create", isLogIn, isAdmin ,
-    courseController.courseCreate
+(
+    "/course/create", 
+    upload.single("course_img"),isLogIn, isAdmin ,courseController.courseCreate
 );
 
 router.put

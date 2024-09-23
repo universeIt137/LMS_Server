@@ -9,23 +9,19 @@ const courseSchema = new Schema({
     },
     course_img : {
         type : String,
-        required : [true,"course_img required"]
+        // required : [true,"course_img required"]
     },
     instructor_name : {
         type :String,
-        require:[true , "Instructor_name required " ]
-    },
-    instructor_img : {
-        type : String,
-        required:[true,"instructor_img required"]
+        // require:[true , "Instructor_name required " ]
     },
     total_sit : {
         type : Number,
-        required : [true,"total sit required"]
+        // required : [true,"total sit required"]
     },
     batch_no : {
         type : Number,
-        required : [true,"batch not required"]
+        // required : [true,"batch not required"]
     }
 
 },{timestamps:true,versionKey:false});
