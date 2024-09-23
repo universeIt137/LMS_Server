@@ -36,8 +36,8 @@ const feedbackController = require("../controllers/user/feedbackController");
 router.post("/user/sign-up", upload.single("img") ,userController.signUp);
 router.post("/user/sign-in", isLogOut , userController.singIn);
 router.get("/user/log-out", isLogIn ,userController.handleLogOut);
-router.get("/single/user", isLogIn, userController.getSingleUser);
-router.put("/user/update", isLogIn, userController.updateUser);
+router.get("/single/user", isLogIn, userController.getUserProfile);
+router.put("/user/update", isLogIn, userController.updateUserProfile);
 router.get("/refresh-token", userController.handleRefreshToken);
 
 // course related api
