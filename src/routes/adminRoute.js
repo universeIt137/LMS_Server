@@ -47,7 +47,10 @@ require("../controllers/admin/resoruceController.js");
 const preRecordVideoController = 
 require("../controllers/admin/proRecordVideoController.js");
 // live class controller
-const liveClassController = require("../controllers/admin/liveClassController.js")
+const liveClassController = require("../controllers/admin/liveClassController.js");
+
+// img middleware
+const upload = require("../middlewares/imageMiddleware.js");
 
 
 
@@ -176,9 +179,9 @@ router.get
 
 router.post
 (
-    "/project/create", isLogIn,isAdmin,
+    "/project/create", upload.single("project_img") , isLogIn,isAdmin,
     projectController.createProject
-);
+);  
 
 router.put
 (
