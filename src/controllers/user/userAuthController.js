@@ -109,6 +109,7 @@ class userClass {
     }
   };
 
+
   handleLogOut = async (req, res) => {
     try {
       res.clearCookie("accessToken");
@@ -124,6 +125,7 @@ class userClass {
       });
     }
   };
+
 
   handleRefreshToken = async (req, res) => {
     const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
@@ -197,14 +199,27 @@ class userClass {
     try {
       let id = req.headers["_id"];
       let filter = { _id: id };
-      let { name, email, phone_number, img } = req.body;
+
+      let { firstName,lastName,username } = req.body;
+
+      let profileImage = "";
+      if (req.file) {
+        const result = await cloudHelper.uploader.upload(req.file.path, {
+          folder: "user-profile_pics", 
+        });
+        profileImage = result.secure_url;
+      }
+
       const update = {
-        name: name,
-        email: email,
-        phone_number: phone_number,
-        img: img,
+        firstName,
+        lastName,
+        username,
+        profile_pick: profileImage,
       };
+
       let data = await userModel.findById({ _id: id });
+
+
       if (!data) {
         return res.status(404).json({
           status: "fail",
@@ -216,9 +231,11 @@ class userClass {
         });
         return res.status(200).json({
           status: "success",
+          msg : `Profile updated successfully`,
           data: data,
         });
       }
+
     } catch (error) {
       return res.status(500).json({
         status: "fail",
