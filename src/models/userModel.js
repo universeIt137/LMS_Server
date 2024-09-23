@@ -5,15 +5,12 @@ const bcrypt = require('bcrypt');
 const signUpSchema = new Schema({
     id : {
         type : String,
-        required : true
     },
     firstName: {
         type : String,
-        required : true
     },
     lastName : {
         type : String,
-        required : true
     },
     username : {
         type : String,
@@ -23,10 +20,9 @@ const signUpSchema = new Schema({
     },
     password : {
         type : String,
-        required : true,
         set: (v) => bcrypt.hashSync(v, bcrypt.genSaltSync(10))
     },
-    img : {
+    profile_pick : {
         type : String,
     },
     role : {
