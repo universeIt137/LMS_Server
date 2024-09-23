@@ -6,7 +6,6 @@ class projectClass {
     try {
       let { project_name, course_id } = req.body;
 
-
       let projectImg = "";
 
       if (req.file) {
@@ -22,12 +21,13 @@ class projectClass {
         project_img: projectImg,
       });
 
+      await newData.save();
+
       return res.status(201).json({
         status: "success",
-        msg : "Project created successfully",
+        msg: "Project created successfully",
         data: newData,
-      })
-
+      });
     } catch (error) {
       return res.status(500).json({
         status: "fail",
@@ -40,14 +40,30 @@ class projectClass {
     try {
       let id = req.params.id;
       let filter = { _id: id };
-      let reqBody = req.body;
-      let update = reqBody;
+      let { project_name, course_id } = req.body;
+      let projectImg = "";
+
+      if (req.file) {
+        const result = await cludHelper.uploader.upload(req.file.path, {
+          folder: "project-images",
+        });
+        projectImg = result.secure_url;
+      }
+
+      let update = {
+        project_name,
+        course_id,
+        project_img: projectImg,
+      };
+
+
       let data = await projectModel.findById({ _id: id });
       if (!data)
         return res.status(404).json({
           status: "fail",
           msg: "Project data not found",
         });
+
       let updateData = await projectModel.findByIdAndUpdate(filter, update, {
         new: true,
       });
@@ -63,6 +79,7 @@ class projectClass {
       });
     }
   };
+
 
   deleteProject = async (req, res) => {
     try {

@@ -185,8 +185,8 @@ router.post
 
 router.put
 (
-    "/project/update/:id", isLogIn,isAdmin,
-    projectController.updateProject
+    "/project/update/:id", 
+    upload.single("project_img"),isLogIn,isAdmin,projectController.updateProject
 );
 
 router.delete
