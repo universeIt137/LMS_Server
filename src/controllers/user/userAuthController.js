@@ -27,7 +27,7 @@ class userClass {
         });
         profileImage = result.secure_url;
       }
-      console.log(profileImage);
+      
       let newUser = new userModel({
         firstName,
         lastName,
