@@ -74,14 +74,15 @@ router.put
 // course related api
 
 router.post
-("/course/create", isLogIn, isAdmin ,
-    courseController.courseCreate
+(
+    "/course/create", 
+    upload.single("course_img"),isLogIn, isAdmin ,courseController.courseCreate
 );
 
 router.put
 (
-    "/course/update/:id",isLogIn,isAdmin,
-    courseController.courseUpdate
+    "/course/update/:id",
+    upload.single("course_img"),isLogIn,isAdmin,courseController.courseUpdate
 );
 
 router.delete
