@@ -6,18 +6,16 @@ class adminUserClass {
         try {
             let id = req.params.id;
             let  filter = { _id : id };
+            let data = await userModel.findById({_id:id});
+            if(!data) return res.status(404).json({
+                status:"fail",
+                msg :"User data not found"
+            });
             await userModel.findByIdAndDelete(filter);
-            if(!data){
-                return res.status(404).json({
-                    status:"fail",
-                    msg : "User not found"
-                });
-            }else {
-                return res.status(200).json({
-                    status:"fail",
-                    msg : "User delete successfully"
-                });
-            }
+            return res.status(200).json({
+                status:"success",
+                msg :"User data delete successfully",
+            });
         } catch (error) {
             return res.status(500).json({
                 status:"fail",
