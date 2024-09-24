@@ -97,6 +97,7 @@ class userClass {
       });
 
       return res.status(200).json({
+        role : `${user.role}`,
         token: token,
         status: "success",
         msg: "User login successfully",
