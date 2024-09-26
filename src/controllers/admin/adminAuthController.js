@@ -84,6 +84,9 @@ class adminUserClass {
             });
         };
     }
+
+    // update code 
+
 }
 
 const adminUserController = new adminUserClass();
