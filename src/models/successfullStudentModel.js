@@ -17,6 +17,10 @@ const successfulStudentSchema = new Schema({
     position_of_job: { 
         type: String
     },
+    company_name: {
+        type : String,
+        required: [true, "Company name required"]
+    },
 }, {
     timestamps: true,
     versionKey: false
