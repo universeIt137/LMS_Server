@@ -2,7 +2,8 @@ const express = require("express");
 
 const router = new express.Router();
 const {isLogIn,isAdmin} 
-= require("../middlewares/authMiddleware")
+= require("../middlewares/authMiddleware");
+const upload  = require("../middlewares/imageMiddleware.js")
 
 //adminUser controller
 const adminUserController = 
@@ -50,7 +51,7 @@ require("../controllers/admin/proRecordVideoController.js");
 const liveClassController = require("../controllers/admin/liveClassController.js");
 
 // img middleware
-const upload = require("../middlewares/imageMiddleware.js");
+
 
 
 
@@ -225,7 +226,7 @@ router.delete
 
 router.get
 (
-    "/all/instructor/admin", isLogIn,isAdmin,
+    "/all/instructor/admin",
     instructorController.allInstructorByAdmin
 );
 
@@ -233,7 +234,7 @@ router.get
 
 router.post
 (
-    "/student/create", isLogIn, isAdmin,
+    "/student/create", upload.single("img") , isLogIn, isAdmin,
     successfulStudentController.create
 );
 

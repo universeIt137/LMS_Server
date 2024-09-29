@@ -6,6 +6,10 @@ const successfulStudentSchema = new Schema({
     course_id: {
         type: mongoose.Schema.Types.ObjectId, 
     },
+    img : {
+        type : String, 
+        required : [true, "Student image required"]
+    },
     student_name: {
         type: String,
         required: [true, "Student name required"]

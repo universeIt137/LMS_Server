@@ -100,7 +100,7 @@ class userClass {
         role : `${user.role}`,
         token: token,
         status: "success",
-        msg: "User login successfully",
+        msg: ` ${user.role} login successfully`,
       });
     } catch (error) {
       return res.status(500).json({
