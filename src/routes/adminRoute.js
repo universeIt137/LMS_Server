@@ -226,7 +226,7 @@ router.delete
 
 router.get
 (
-    "/all/instructor/admin",
+    "/all/instructor",
     instructorController.allInstructorByAdmin
 );
 
