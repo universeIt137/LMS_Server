@@ -6,6 +6,10 @@ const successfulStudentSchema = new Schema({
     course_id: {
         type: mongoose.Schema.Types.ObjectId, 
     },
+    img : {
+        type : String, 
+        required : [true, "Student image required"]
+    },
     student_name: {
         type: String,
         required: [true, "Student name required"]
@@ -16,6 +20,10 @@ const successfulStudentSchema = new Schema({
     },
     position_of_job: { 
         type: String
+    },
+    company_name: {
+        type : String,
+        required: [true, "Company name required"]
     },
 }, {
     timestamps: true,
