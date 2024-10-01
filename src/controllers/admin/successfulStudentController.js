@@ -6,29 +6,9 @@ const cloudHelper = require("../../helper/cloudinaryHelper")
 class successfulStudentClass {
     create = async (req, res) => {
         try {
-            let { course_id, student_name, batch_no, position_of_job, company_name } = req.body;
-            console.log(course_id, student_name, batch_no, position_of_job, company_name)
-
-            let studentImg = ""
-            console.log(req.file)
-
-            if (req.file) {
-                const result = await cloudHelper.uploader.upload(req.file.path, {
-                    folder: "student-images",
-                });
-                studentImg = result.secure_url;
-            }
-            let data = new successfulStudentModel({
-                course_id,
-                img: studentImg,
-                student_name,
-                batch_no,
-                position_of_job,
-                company_name
-            });
-
-            await data.save();
-
+            let reqBody = req.body;
+            let data = await successfulStudentModel.create(reqBody);
+            console.log(data);
             return res.status(201).json({
                 status: "success",
                 msg: "create successfully",
