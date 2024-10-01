@@ -8,7 +8,6 @@ class successfulStudentClass {
         try {
             let reqBody = req.body;
             let data = await successfulStudentModel.create(reqBody);
-            console.log(data);
             return res.status(201).json({
                 status: "success",
                 msg: "create successfully",
