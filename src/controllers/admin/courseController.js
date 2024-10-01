@@ -129,6 +129,26 @@ class courseClass {
       });
     }
   };
+  singleCourse = async (req, res) => {
+    try {
+      let id = req.params.id;
+      let filter = {_id : id};
+      let data = await courseModel.findById(filter);
+      if(!data) return res.status(404).json({
+        status : "fail",
+        msg : "Course data not found"
+      });
+      return res.status(200).json({
+        status : "success",
+        data : data
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status : "fail",
+        msg : error.toString()
+      });
+    }
+  }
 }
 
 const courseController = new courseClass();

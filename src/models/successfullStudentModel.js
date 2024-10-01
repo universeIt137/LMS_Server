@@ -8,7 +8,6 @@ const successfulStudentSchema = new Schema({
     },
     img : {
         type : String, 
-        required : [true, "Student image required"]
     },
     student_name: {
         type: String,

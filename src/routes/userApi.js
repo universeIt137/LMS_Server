@@ -22,6 +22,7 @@ const projectController = require("../controllers/user/projectController");
 const courseSuccessfulStudentController = require("../controllers/user/courseSuccessfulStudentController");
 //feedback controller
 const feedbackController = require("../controllers/user/feedbackController");
+const adminCourseController = require("../controllers/admin/courseController");
 
 // auth related api
 
@@ -40,6 +41,7 @@ router.get("/refresh-token", userController.handleRefreshToken);
 // course related api
 
 router.get("/all-course", courseController.getAllCourse);
+router.get("/single-course/:id" , adminCourseController.singleCourse);
 
 // courseDetails related api
 
@@ -47,6 +49,8 @@ router.get(
   "/get-all-course-details",
   courseDetailsController.getAllCourseDetails
 );
+router.get("/get-single-course-details/:id", courseDetailsController.getSingleCourseDetails )
+
 
 // curriculum related api
 
