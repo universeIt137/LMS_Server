@@ -208,7 +208,7 @@ router.get
 
 router.post
 (
-    "/instructor/create",isLogIn,isAdmin,
+    "/instructor/create",
     instructorController.create
 );
 
