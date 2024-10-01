@@ -36,8 +36,8 @@ class curriculumClass {
             const joinWithProjectDataId = {
                 $lookup: {
                     from: "project-datas",
-                    localField: "project_details_id",
-                    foreignField: "_id",
+                    localField: "course_id",
+                    foreignField: "course_id",
                     as: "projectData"
                 }
             };
@@ -49,8 +49,8 @@ class curriculumClass {
             const joinWithCourseSuccessStudentId = {
                 $lookup: {
                     from: "successful-students",
-                    localField: "successful_student_id",
-                    foreignField: "_id",
+                    localField: "course_id",
+                    foreignField: "course_id",
                     as: "courseSuccessfulStudentData"
                 }
             };
@@ -64,8 +64,8 @@ class curriculumClass {
             const joinWithFeedbackStudentId = {
                 $lookup: {
                     from: "lerner-feedbacks",
-                    localField: "feedback_student_id",
-                    foreignField: "_id",
+                    localField: "course_id",
+                    foreignField: "course_id",
                     as: "feedbackStudentData"
                 }
             };
