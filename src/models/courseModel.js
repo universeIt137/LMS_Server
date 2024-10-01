@@ -1,32 +1,24 @@
-const mongoose = require("mongoose");
-const {Schema,model} = mongoose;
+const { Schema, model } = require("mongoose");
 
 const courseSchema = new Schema({
-    course_name : {
-        type : String,
-        required : [true,"Course name required"],
-        unique : [true,"always course name unique "]
+    course_name: {
+        type: String,
+        required: [true, "Course name required"],  // No unique: true constraint
     },
-    course_img : {
-        type : String,
-        // required : [true,"course_img required"]
+    course_img: {
+        type: String,
     },
-    instructor_name : {
-        type :String,
-        // require:[true , "Instructor_name required " ]
+    instructor_name: {
+        type: String,
     },
-    total_sit : {
-        type : Number,
-        // required : [true,"total sit required"]
+    total_sit: {
+        type: Number,
     },
-    batch_no : {
-        type : Number,
-        // required : [true,"batch not required"]
+    batch_no: {
+        type: Number,
     }
+}, { timestamps: true, versionKey: false });
 
-},{timestamps:true,versionKey:false});
-
-
-const courseModel = model("courses",courseSchema);
+const courseModel = model("course", courseSchema);
 
 module.exports = courseModel;
