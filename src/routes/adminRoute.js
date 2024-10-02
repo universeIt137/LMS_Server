@@ -1,8 +1,6 @@
 const express = require("express");
 
 const router = new express.Router();
-const {isLogIn,isAdmin} 
-= require("../middlewares/authMiddleware");
 const upload  = require("../middlewares/imageMiddleware.js")
 
 //adminUser controller
@@ -58,16 +56,16 @@ const liveClassController = require("../controllers/admin/liveClassController.js
 ///auth api
 router.delete
 (
-    "/user/delete/:id", isLogIn, isAdmin,
+    "/user/delete/:id", 
     adminUserController.deleteUser
 );
 router.get(
-    "/all-user/", isLogIn, isAdmin, 
+    "/all-user/",  
     adminUserController.allUser
 );
 router.put
 (
-    "/admin/update", isLogIn,isAdmin,
+    "/admin/update",
     adminUserController.adminProfileUpdate
 );
 
@@ -77,24 +75,24 @@ router.put
 router.post
 (
     "/course/create", 
-    upload.single("course_img"),isLogIn, isAdmin ,courseController.courseCreate
+    upload.single("course_img"),courseController.courseCreate
 );
 
 router.put
 (
     "/course/update/:id",
-    upload.single("course_img"),isLogIn,isAdmin,courseController.courseUpdate
+    upload.single("course_img"),courseController.courseUpdate
 );
 
 router.delete
 (
-    "/course/delete/:id", isLogIn, isAdmin,
+    "/course/delete/:id", 
     courseController.courseDelete
 );
 
 router.get
 (
-    "/admin-all-course", isLogIn, isAdmin, 
+    "/admin-all-course",  
     courseController.allCourseByAdmin
 );
 
@@ -102,25 +100,25 @@ router.get
 
 router.post
 (
-    "/course/details/created", isLogIn, isAdmin, 
+    "/course/details/created",  
     courseDetailsController.courseDetailsCreated
 );
 
 router.put
 (
-    "/course/details/update/:id", isLogIn, isAdmin,
+    "/course/details/update/:id", 
     courseDetailsController.courseDetailsUpdate
 );
 
 router.delete
 (
-    "/course/details/delete/:id",isLogIn,isAdmin,
+    "/course/details/delete/:id",
     courseDetailsController.courseDetailsDelete
 );
 
 router.get
 (
-    "/get/all/course-details-admin", isLogIn,isAdmin,
+    "/get/all/course-details-admin",
     courseDetailsController.getAllCourseDetails
 );
 
@@ -129,25 +127,25 @@ router.get
 
 router.post
 (
-    "/curriculum/create", isLogIn,isAdmin,
+    "/curriculum/create",
     curriculumController.createCurriculum
 );
 
 router.delete
 (
-    "/curriculum/delete/:id", isLogIn,isAdmin,
+    "/curriculum/delete/:id",
     curriculumController.deleteCurriculum
 );
 
 router.put
 (
-    "/curriculum/update/:id", isLogIn, isAdmin,
+    "/curriculum/update/:id", 
     curriculumController.updateCurriculum
 );
 
 router.get
 (
-    "/all/curriculum/admin", isLogIn, isAdmin,
+    "/all/curriculum/admin", 
     curriculumController.getAllCurriculumByAdmin 
 );
 
@@ -155,25 +153,25 @@ router.get
 
 router.post
 (
-    "/get/in/course/create",isLogIn,isAdmin,
+    "/get/in/course/create",
     getInCourseController.create
 );
 
 router.put
 (
-    "/get/in/course/update/:id", isLogIn, isAdmin,
+    "/get/in/course/update/:id", 
     getInCourseController.updateGetInCourse
 );
 
 router.delete
 (
-    "/get/in/course/delete/:id", isLogIn, isAdmin,
+    "/get/in/course/delete/:id", 
     getInCourseController.deleteGetInCourse
 );
 
 router.get
 (
-    "/get/in/course/admin", isLogIn,isAdmin,
+    "/get/in/course/admin",
     getInCourseController.allGetInCourseAdmin
 )
 
@@ -181,25 +179,25 @@ router.get
 
 router.post
 (
-    "/project/create", upload.single("project_img") , isLogIn,isAdmin,
+    "/project/create", upload.single("project_img") ,
     projectController.createProject
 );  
 
 router.put
 (
     "/project/update/:id", 
-    upload.single("project_img"),isLogIn,isAdmin,projectController.updateProject
+    projectController.updateProject
 );
 
 router.delete
 (
-    "/project/delete/:id", isLogIn,isAdmin,
+    "/project/delete/:id",
     projectController.deleteProject
 );
 
 router.get
 (
-    "/get/all/project/admin", isLogIn, isAdmin,
+    "/get/all/project/admin", 
     projectController.getAllProjectByAdmin
 
 )
@@ -214,13 +212,13 @@ router.post
 
 router.put
 (
-    "/instructor/update/:id",isLogIn,isAdmin,
+    "/instructor/update/:id",
     instructorController.updateInstructor
 );
 
 router.delete
 (
-    "/instructor/delete/:id", isLogIn,isAdmin,
+    "/instructor/delete/:id",
     instructorController.deleteInstructor
 );
 
@@ -236,25 +234,25 @@ router.get("/instructors-name", instructorController.allInstructorName)
 
 router.post
 (
-    "/student/create", upload.single("img") , isLogIn, isAdmin,
+    "/student/create",
     successfulStudentController.create
 );
 
 router.put
 (
-    "/student/update/:id", isLogIn,isAdmin,
+    "/student/update/:id",
     successfulStudentController.update
 );
 
 router.delete
 (
-    "/student/delete/:id", isLogIn,isAdmin,
+    "/student/delete/:id",
     successfulStudentController.successfulStudentDelete
 );
 
 router.get
 (
-    "/all-successful-student/admin", isLogIn,isAdmin,
+    "/all-successful-student/admin",
     successfulStudentController.allSuccessfulStudentByAdmin
 );
 
@@ -262,25 +260,25 @@ router.get
 
 router.post
 (
-    "/feedback/create" , isLogIn, isAdmin,
+    "/feedback/create" , 
     feedbackController.createFeedback
 );
 
 router.put
 (
-    "/feedback/update/:id" , isLogIn,isAdmin,
+    "/feedback/update/:id" ,
     feedbackController.updateFeedback
 );
 
 router.delete
 (
-    "/feedback/delete/:id", isLogIn,isAdmin,
+    "/feedback/delete/:id",
     feedbackController.deleteFeedback
 );
 
 router.get
 (
-    "/all-feedback/admin", isLogIn,isAdmin,
+    "/all-feedback/admin",
     feedbackController.allFeedbackByAdmin
 );
 
@@ -288,31 +286,31 @@ router.get
 
 router.post
 (
-    "/module/create", isLogIn,isAdmin,
+    "/module/create",
     moduleController.moduleCreate
 );
 
 router.put
 (
-    "/module/update/:id",isLogIn,isAdmin,
+    "/module/update/:id",
     moduleController.moduleUpdate
 );
 
 router.delete
 (
-    "/module/delete/:id", isLogIn, isAdmin,
+    "/module/delete/:id", 
     moduleController.moduleDelete
 );
 
 router.get
 (
-    "/get-all-module/admin", isLogIn,isAdmin,
+    "/get-all-module/admin",
     moduleController.getAllModuleByAdmin
 );
 
 router.get
 (
-    "/get/single/module/:id",isLogIn,isAdmin,
+    "/get/single/module/:id",
     moduleController.getSingleModuleByAdmin
 );
 
@@ -322,24 +320,24 @@ router.get
 
 router.post
 (
-    "/assignment/create", isLogIn,isAdmin,
+    "/assignment/create",
     assignmentController.assignmentPost
 );
 
 router.put
 (
-    "/assignment/update/:id", isLogIn,isAdmin,
+    "/assignment/update/:id",
     assignmentController.assignmentUpdate
 );
 
 router.delete
 (
-    "/assignment/delete/:id", isLogIn,isAdmin,
+    "/assignment/delete/:id",
     assignmentController.assignmentDelete
 );
 
 router.get(
-    "/all-assignment/admin", isLogIn,isAdmin,
+    "/all-assignment/admin",
     assignmentController.allAssignmentByAdmin
 );
 
@@ -347,7 +345,7 @@ router.get(
 
 router.post
 (
-    "/module-details/create", isLogIn, isAdmin,
+    "/module-details/create", 
     moduleDetailsController.create
 );
 
@@ -356,7 +354,7 @@ router.post
 
 router.post
 (
-    "/resource/create", isLogIn,isAdmin,
+    "/resource/create",
     resourceController.create
 );
 
@@ -364,7 +362,7 @@ router.post
 
 router.post
 (
-    "/upload/video", isLogIn,isAdmin,
+    "/upload/video",
     preRecordVideoController.create
 );
 
@@ -373,7 +371,7 @@ router.post
 
 router.post
 (
-    "/live-class/create", isLogIn,isAdmin,
+    "/live-class/create",
     liveClassController.create
 )
 
