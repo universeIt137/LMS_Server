@@ -19,6 +19,7 @@ class courseClass {
       });
     }
   };
+  
   courseUpdate = async (req, res) => {
     try {
       let id = req.params.id;
@@ -47,6 +48,7 @@ class courseClass {
       });
     }
   };
+
   courseDelete = async (req, res) => {
     try {
       let id = req.params.id;
@@ -69,6 +71,7 @@ class courseClass {
       });
     }
   };
+
   allCourseByAdmin = async (req, res) => {
     try {
       let data = await courseModel.find();
@@ -88,6 +91,7 @@ class courseClass {
       });
     }
   };
+
   singleCourse = async (req, res) => {
     try {
       let id = req.params.id;
@@ -107,7 +111,39 @@ class courseClass {
         msg : error.toString()
       });
     }
-  }
+  };
+
+  allCourseName = async (req, res) => {
+    try {
+      let data = await courseModel.aggregate([
+        {
+          $project: {
+            _id: 1,
+            course_name: 1,
+          },
+        },
+      ]);
+  
+      if (data.length === 0) {
+        return res.status(404).json({
+          status: "fail",
+          msg: "Course name not found",
+        });
+      }
+  
+      return res.status(200).json({
+        status: "success",
+        data: data,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: "fail",
+        msg: error.toString(),
+      });
+    }
+  };
+  
+
 }
 
 const courseController = new courseClass();
