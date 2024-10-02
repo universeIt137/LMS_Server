@@ -96,6 +96,8 @@ router.get
     courseController.allCourseByAdmin
 );
 
+router.get("/all-course-name", courseController.allCourseName);
+
 // courseDetails related api
 
 router.post
