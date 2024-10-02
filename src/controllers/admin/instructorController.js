@@ -86,6 +86,39 @@ class instructorClass {
             });
         }
     };
+    allInstructorName = async (req, res) => {
+        try {
+            // Retrieve only the instructor_name field using $project
+            let data = await instructorModel.aggregate([
+                {
+                    $project: {
+                        instructor_name: 1, // Include only the instructor_name field
+                        _id: 1 // Optionally exclude the _id field
+                    }
+                }
+            ]);
+    
+            if (data.length === 0) {
+                return res.status(404).json({
+                    status: "fail",
+                    msg: "Instructor not found"
+                });
+            }
+    
+            return res.status(200).json({
+                status: "success",
+                msg: "Find all instructor names",
+                data: data
+            });
+        } catch (error) {
+            return res.status(500).json({
+                status: "fail",
+                msg: error.toString()
+            });
+        }
+    };
+
+    
 }
 
 const instructorController = new instructorClass();

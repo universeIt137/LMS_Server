@@ -230,6 +230,8 @@ router.get
     instructorController.allInstructorByAdmin
 );
 
+router.get("/instructors-name", instructorController.allInstructorName)
+
 // successful student related api
 
 router.post
