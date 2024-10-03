@@ -104,7 +104,7 @@ class getInCourseClass {
             }
             return {
                 status : "success",
-                msg : "Get all data successfully",
+                msg : "Get single data successfully",
                 data : data
             };
 

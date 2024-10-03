@@ -28,7 +28,6 @@ const adminCourseController = require("../controllers/admin/courseController");
 
 router.post(
   "/user/sign-up",
-  upload.single("profile_pick"),
   userController.signUp
 );
 
@@ -41,7 +40,7 @@ router.get("/refresh-token", userController.handleRefreshToken);
 // course related api
 
 router.get("/all-course", courseController.getAllCourse);
-router.get("/single-course/:id" , adminCourseController.singleCourse);
+router.get("/single-course/:id", adminCourseController.singleCourse);
 
 // courseDetails related api
 
@@ -49,7 +48,7 @@ router.get(
   "/get-all-course-details",
   courseDetailsController.getAllCourseDetails
 );
-router.get("/get-single-course-details/:id", courseDetailsController.getSingleCourseDetails )
+router.get("/get-single-course-details/:id", courseDetailsController.getSingleCourseDetails)
 
 
 // curriculum related api
