@@ -1,4 +1,5 @@
 const curriculumModel = require("../../models/curriculumModel");
+const curriculumService = require("../../services/curriculumService");
 
 class curriculumClass {
     createCurriculum = async (req,res)=>{
@@ -67,22 +68,25 @@ class curriculumClass {
     };
 
     getAllCurriculumByAdmin = async (req,res)=>{
-        try {
-            let data = await curriculumModel.find();
-            if(data.length===0) return res.status(404).json({
-                status:"fail",
-                msg : "Curriculum not found"
-            });
-            return res.status(200).json({
-                status : "success",
-                data : data
-            });
-        } catch (error) {
-            return res.status(500).json({
-                status:"fail",
-                msg : error.toString()
-            });
-        }
+        let data = await curriculumService.allCurriculumService();
+        res.send(data);
+        console.log(data);
+        // try {
+        //     let data = await curriculumModel.find();
+        //     if(data.length===0) return res.status(404).json({
+        //         status:"fail",
+        //         msg : "Curriculum not found"
+        //     });
+        //     return res.status(200).json({
+        //         status : "success",
+        //         data : data
+        //     });
+        // } catch (error) {
+        //     return res.status(500).json({
+        //         status:"fail",
+        //         msg : error.toString()
+        //     });
+        // }
     };
 }
 
