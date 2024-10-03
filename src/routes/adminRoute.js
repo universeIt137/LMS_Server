@@ -74,14 +74,12 @@ router.put
 
 router.post
 (
-    "/course/create", 
-    upload.single("course_img"),courseController.courseCreate
+    "/course/create",courseController.courseCreate
 );
 
 router.put
 (
-    "/course/update/:id",
-    upload.single("course_img"),courseController.courseUpdate
+    "/course/update/:id",courseController.courseUpdate
 );
 
 router.delete
@@ -181,11 +179,12 @@ router.get
 
 router.get("/get/in/course/:id", getInCourseController.singleGetInCourseById);
 
+
 // project related api
 
 router.post
 (
-    "/project/create", upload.single("project_img") ,
+    "/project/create",
     projectController.createProject
 );  
 

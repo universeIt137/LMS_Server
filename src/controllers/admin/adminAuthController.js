@@ -54,8 +54,6 @@ class adminUserClass {
     
     adminProfileUpdate = async (req,res)=>{
         try {
-            let id = req.user._id;
-            let filter =  { _id : id };
             let {name,email,phone_number,img} = req.body;
             const update = {
                 name : name,
@@ -63,15 +61,8 @@ class adminUserClass {
                 phone_number:phone_number,
                 img : img
             }
-            let data = await userModel.findById({_id : id});
-            if(!data) return res.status(404).json({
-                status:"fail",
-                msg : "Admin data not found"
-            })
-            let userData = await userModel.findByIdAndUpdate(
-                filter,
+            let userData = await userModel.updateOne(
                 update,
-                {new:true}
             );
             return res.status(200).json({
                 status:"success",

@@ -1,33 +1,17 @@
 const projectModel = require("../../models/projectModel");
-const cludHelper = require("../../helper/cloudinaryHelper");
 const projectService = require("../../services/projectService");
 
 class projectClass {
   createProject = async (req, res) => {
     try {
-      let { project_name, course_id } = req.body;
+      let reqBody = req.body;
 
-      let projectImg = "";
-
-      if (req.file) {
-        const result = await cludHelper.uploader.upload(req.file.path, {
-          folder: "project-images",
-        });
-        projectImg = result.secure_url;
-      }
-
-      let newData = new projectModel({
-        project_name,
-        course_id,
-        project_img: projectImg,
-      });
-
-      await newData.save();
+      let data = await projectModel.create(reqBody);
 
       return res.status(201).json({
         status: "success",
         msg: "Project created successfully",
-        data: newData,
+        data: data,
       });
     } catch (error) {
       return res.status(500).json({
