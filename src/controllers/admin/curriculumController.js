@@ -71,14 +71,21 @@ class curriculumClass {
         let data = await curriculumService.allCurriculumService();
         res.send(data);
         console.log(data);
+    };
+    
+    getSingleCurriculumById = async (req,res)=>{
+        let data = await curriculumService.singleCurriculumService(req);
+        res.send(data);
         // try {
-        //     let data = await curriculumModel.find();
-        //     if(data.length===0) return res.status(404).json({
+        //     let id = req.params.id;
+        //     let filter = {_id : id};
+        //     let data = await curriculumModel.findById(filter);
+        //     if(!data) return res.status(404).json({
         //         status:"fail",
         //         msg : "Curriculum not found"
         //     });
         //     return res.status(200).json({
-        //         status : "success",
+        //         status:"success",
         //         data : data
         //     });
         // } catch (error) {
@@ -87,7 +94,7 @@ class curriculumClass {
         //         msg : error.toString()
         //     });
         // }
-    };
+    }
 }
 
 let curriculumController = new curriculumClass();
