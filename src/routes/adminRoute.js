@@ -179,6 +179,8 @@ router.get
     getInCourseController.allGetInCourseAdmin
 )
 
+router.get("/get/in/course/:id", getInCourseController.singleGetInCourseById);
+
 // project related api
 
 router.post

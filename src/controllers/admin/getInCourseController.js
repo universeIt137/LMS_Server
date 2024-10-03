@@ -72,6 +72,11 @@ class getInCourseClass {
         res.send(data);
     };
 
+    singleGetInCourseById = async (req,res)=>{
+        let data = await getInCourseService.singleGetInService(req);
+        res.send(data);
+    }
+
 }
 
 const getInCourseController = new getInCourseClass();
