@@ -111,6 +111,11 @@ class projectClass {
     let data = await projectService.getAllProjectsService();
     res.send(data);
   };
+
+  getSingleProjectById = async (req, res) => {
+    let data = await projectService.getSingleProjectService(req);
+    res.send(data);
+  };
 }
 
 const projectController = new projectClass();
