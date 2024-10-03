@@ -208,6 +208,8 @@ router.get
 
 )
 
+router.get("/single/project/:id", projectController.getSingleProjectById )
+
 // instructor related api
 
 router.post
@@ -233,6 +235,8 @@ router.get
     "/all/instructor",
     instructorController.allInstructorByAdmin
 );
+
+router.get("/single/instructor/:id", instructorController.getSingleInstructorById);
 
 router.get("/instructors-name", instructorController.allInstructorName)
 
