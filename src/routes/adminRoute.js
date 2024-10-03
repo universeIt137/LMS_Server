@@ -145,6 +145,8 @@ router.put
     curriculumController.updateCurriculum
 );
 
+router.get("/single/curriculum/:id", curriculumController.getSingleCurriculumById );
+
 router.get
 (
     "/all/curriculum/admin", 
