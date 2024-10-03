@@ -31,24 +31,15 @@ const courseDetailsSchema = new Schema({
         type : Number,
         required : true
     },
-    curriculum_id : {
-        type : mongoose.Schema.Types.ObjectId,
+    course_duration : {
+        type : Number,
     },
-    get_course_id : {
-        type : mongoose.Schema.Types.ObjectId,
+    course_video : {
+        type : String,
     },
-    project_details_id : {
-        type : mongoose.Schema.Types.ObjectId,
+    youtube_video_url : {
+        type : String,
     },
-    course_instructor_id : {
-        type : mongoose.Schema.Types.ObjectId,
-    },
-    successful_student_id : {
-        type : mongoose.Schema.Types.ObjectId,
-    },
-    feedback_student_id : {
-        type : mongoose.Schema.Types.ObjectId
-    }
 },{
     timestamps:true,
     versionKey:false
