@@ -33,6 +33,13 @@ class projectClass {
                 projection
             ]);
 
+            if(data.length===0){
+                return {
+                    status : "fail",
+                    msg : "Projects not found",
+                }
+            }
+
             return {
                 status : "success",
                 msg : "Find all projects successfully",
