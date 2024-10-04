@@ -293,6 +293,8 @@ router.get
     feedbackController.allFeedback
 );
 
+router.get("/single-feedback/:id",feedbackController.singleFeedbackById);
+
 // module related api
 
 router.post
