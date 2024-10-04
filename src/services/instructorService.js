@@ -94,7 +94,7 @@ class instructorClass {
 
             return {
                 status: "success",
-                message: "All instructor retrieved successfully",
+                message: "Single instructor retrieved successfully",
                 data : data 
             };
 

@@ -11,18 +11,15 @@ const successfulStudentSchema = new Schema({
     },
     student_name: {
         type: String,
-        required: [true, "Student name required"]
     },
     batch_no: {
         type: Number,
-        required: true
     },
     position_of_job: { 
         type: String
     },
     company_name: {
         type : String,
-        required: [true, "Company name required"]
     },
 }, {
     timestamps: true,
