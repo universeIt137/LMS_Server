@@ -261,9 +261,11 @@ router.delete
 
 router.get
 (
-    "/all-successful-student/admin",
-    successfulStudentController.allSuccessfulStudentByAdmin
+    "/all-successful-student",
+    successfulStudentController.allSuccessfulStudent
 );
+
+router.get("/single/successful-student/:id", successfulStudentController.getSingleStudentById);
 
 // feedback related api
 
