@@ -365,6 +365,7 @@ router.post
 
 router.delete("/module-details/delete/:id", moduleDetailsController.moduleDetailsDelete);
 router.get("/all/modules/details",moduleDetailsController.allModuleDetails);
+router.get('/single/modules/details/:id', moduleDetailsController.singleModuleDetailsById)
 
 
 // resource api 
@@ -374,6 +375,10 @@ router.post
     "/resource/create",
     resourceController.create
 );
+
+router.put("/resource/update/:id", resourceController.update);
+router.delete("/resource/delete/:id", resourceController.resourceDelete);
+router.get("/all/resource", resourceController.allResource);
 
 // pre recorde video api
 
