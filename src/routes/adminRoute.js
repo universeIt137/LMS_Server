@@ -289,8 +289,8 @@ router.delete
 
 router.get
 (
-    "/all-feedback/admin",
-    feedbackController.allFeedbackByAdmin
+    "/all-feedback",
+    feedbackController.allFeedback
 );
 
 // module related api

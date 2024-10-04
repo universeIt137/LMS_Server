@@ -26,7 +26,7 @@ class feedbackClass {
             let filter = {_id : id};
             let reqBody = req.body;
             let update = reqBody;
-            let data = await feedbackModel.findById({_id : id});
+            let data = await feedbackModel.findById(id);
             if(!data) return res.status(404).json({
                 status:"fail",
                 msg : "feedback data not found"
@@ -71,8 +71,8 @@ class feedbackClass {
         }
     };
 
-    allFeedbackByAdmin = async (req,res)=>{
-        let data = await feedbackService.findAllFeedbackService();
+    allFeedback = async (req,res)=>{
+        const data = await feedbackService.findAllFeedbackService();
         res.send(data);
     }
 }

@@ -3,47 +3,54 @@ const feedbackModel = require("../models/learnerFeedbackModel");
 class feedbackClass {
     findAllFeedbackService = async ()=>{
         try {
-            // join with course id
+            // join with course id 
             let joinWithCourseId = {
                 $lookup: {
                     from: "courses",
                     localField: "course_id",
                     foreignField: "_id",
-                    as: "data"
+                    as: "courseData"
                 }
             };
-    
-            const projection = { $project : 
-                {
-                    "name" : 1,
-                    "feedback" : 1,
-                    "batch_no" : 1,
-                    "createdAt" :1,
-                    "data.course_name" :  1,
-                    "data.batch_no" : 1
+            // join with student id
+            let joinWithStudentId = {
+                $lookup: {
+                    from: "users",
+                    localField: "student_id",
+                    foreignField: "_id",
+                    as: "studentData"
                 }
             };
-    
-            // unwind data
-    
-            const unwindData = {"$unwind":"$data"}
-    
+
+            // unwind courseData
+            const unwindCourseData = {  $unwind: "$courseData" };
+            const unwindStudentData = {  $unwind: "$studentData" };
+
+            // projection
+
+            const projection = {
+                $project: {
+                    "feedback": 1,
+                    "courseData.course_name": 1,
+                    "studentData.profile_pick" : 1,
+                }
+            };
+            
+
             let data = await feedbackModel.aggregate([
-                    joinWithCourseId,
-                    unwindData,
-                    projection
+                joinWithCourseId,
+                joinWithStudentId,
+                unwindStudentData,
+                unwindCourseData,
+                projection
             ]);
-    
             return {
-                status:"success",
-                msg : "Find all data successfully",
-                data : data
+                status: "success",
+                msg: "Find all data successfully",
+                data: data
             };
         } catch (error) {
-            return {
-                status:"fail",
-                msg : error.toString()
-            };
+            
         }
     };
 }
