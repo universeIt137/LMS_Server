@@ -81,6 +81,11 @@ class moduleDetailsClass {
         let data = await moduleDetailsService.allModuleDetailsService();
         res.send(data);
     };
+
+    singleModuleDetailsById = async function (req, res) {
+        let data = await moduleDetailsService.singleModuleDetailsService(req);
+        res.send(data);
+    };
 }
 
 const moduleDetailsController = new moduleDetailsClass();

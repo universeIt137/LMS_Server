@@ -365,6 +365,7 @@ router.post
 
 router.delete("/module-details/delete/:id", moduleDetailsController.moduleDetailsDelete);
 router.get("/all/modules/details",moduleDetailsController.allModuleDetails);
+router.get('/single/modules/details/:id', moduleDetailsController.singleModuleDetailsById)
 
 
 // resource api 
