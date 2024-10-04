@@ -376,6 +376,10 @@ router.post
     resourceController.create
 );
 
+router.put("/resource/update/:id", resourceController.update);
+router.delete("/resource/delete/:id", resourceController.resourceDelete);
+router.get("/all/resource", resourceController.allResource);
+
 // pre recorde video api
 
 router.post

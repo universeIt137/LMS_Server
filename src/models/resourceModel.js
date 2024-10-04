@@ -4,11 +4,12 @@ const {Schema,model} = mongoose;
 const resourceSchema = new Schema({
     course_id : {
         type : mongoose.Schema.Types.ObjectId,
-        required : true
     },
     module_id : {
-        type : String,
-        required : true
+        type : mongoose.Schema.Types.ObjectId, 
+    },
+    module_details_id : {
+        type : mongoose.Schema.Types.ObjectId,
     },
     name_of_resource : {
         type : String,
