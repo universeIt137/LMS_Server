@@ -74,7 +74,11 @@ class feedbackClass {
     allFeedback = async (req,res)=>{
         const data = await feedbackService.findAllFeedbackService();
         res.send(data);
-    }
+    };
+    singleFeedbackById = async (req,res)=>{
+        const data = await feedbackService.singleFeedbackService(req);
+        res.send(data);
+    };
 }
 
 const feedbackController = new feedbackClass();
