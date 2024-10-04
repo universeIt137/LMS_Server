@@ -72,6 +72,6 @@ router.get(
 
 // feedback api
 
-router.get("/all-feedback", feedbackController.allFeedback);
+
 
 module.exports = router;
