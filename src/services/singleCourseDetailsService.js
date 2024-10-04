@@ -97,10 +97,12 @@ class curriculumClass {
                 joinWithFeedbackStudentId,
                 joinWithCourseInstructorId,
             ]);
+
             return {
                 status: "success",
                 data: data
             };
+
 
         } catch (error) {
             return {

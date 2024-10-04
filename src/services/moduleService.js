@@ -4,57 +4,53 @@ const moduleModel = require("../models/moduleModel");
 class moduleServicesClass {
     getAllModuleService = async () => {
         try {
-          // Join with course collection on course_id
-            const joinWithCourseId = {
+            // join with course id 
+            let joinWithCourseId = {
                 $lookup: {
-                from: "courses",
-                localField: "course_id",
-                foreignField: "_id",
-                as: "data"
+                    from: "courses",
+                    localField: "course_id",
+                    foreignField: "_id",
+                    as : "courseData"
                 }
             };
-        
-            // Unwind the array from the lookup stage
-            const unwindData = { $unwind: "$data" };
-        
-            // Projection to exclude certain fields
-            let projection = {
-                $project: { // Changed from $projection to $project
-                "updatedAt": 0,
-                "data._id": 0,
-                "data.course_img": 0,
-                "data.instructor_name": 0,
-                "data.instructor_img": 0,
-                "data.total_sit": 0,
-                "data.createdAt": 0,
-                "data.updatedAt": 0
+            // unwind courseData
+
+            const unwindCourseData = {  $unwind: "$courseData" };
+
+            // projection 
+
+            const projection = {
+                $project : {
+                    "module_name" : 1,
+                    "module_topic" : 1,
+                    "total_days_module" : 1,
+                    "total_live_class" : 1,
+                    "total_assignment" : 1,
+                    "total_pre_record_video" : 1,
+                    "total_quiz_test" : 1,
+                    "courseData.course_name" : 1,
+                    "courseData.course_img": 1,
                 }
-            };
-        
-            // Execute the aggregation pipeline
-            const data = await moduleModel.aggregate([
+            }
+
+
+
+            let data = await moduleModel.aggregate([
                 joinWithCourseId,
-                unwindData,
+                unwindCourseData,
                 projection
             ]);
-
-            if(data.length===0){
-                return {
-                    status:"fail",
-                    dat : data
-                };
+            return {
+                status : "success",
+                msg : "Find all data successfully",
+                data : data
             }
-                return {
-                    status: "success",
-                    msg: "Found all module data",
-                    data: data
-                };
-            } catch (error) {
-                return {
-                    status: "fail",
-                    msg: error.toString()
-                };
+        } catch (error) {
+            return {
+                status : "fail",
+                msg : error.toString()
             }
+        }
     };
 
     getSingleModuleService = async (req) => {
