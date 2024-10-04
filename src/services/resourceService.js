@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const resourceModel = require("../models/resourceModel");
 
 class resourceClass {
@@ -31,6 +32,57 @@ class resourceClass {
                 }
             }
             let data = await resourceModel.aggregate([
+                joinWithCourseId,
+                joinWithModuleId,
+                joinWithModuleDetailsId
+            ]);
+            return {
+                status : "success",
+                msg : "Find all data successfully",
+                data : data
+            };
+        } catch (error) {
+            return {
+                status : "fail",
+                msg : error.toString()
+            };
+        }
+    };
+
+    singleResourceService = async function(req){
+        let id = new mongoose.Types.ObjectId(req.params.id);
+        try {
+            // match stage
+            let matchStage = {$match : { _id : id }};
+            // join with course id 
+            let joinWithCourseId = {
+                $lookup: {
+                    from: "courses",
+                    localField: "course_id",
+                    foreignField: "_id",
+                    as: "data"
+                }
+            };
+            // join with module id
+            let joinWithModuleId = {
+                $lookup: {
+                    from: "modules",
+                    localField: "module_id",
+                    foreignField: "_id",
+                    as: "moduleData"
+                }
+            };
+            // join with module details id
+            const joinWithModuleDetailsId = {
+                $lookup: {
+                    from: "module-details",
+                    localField: "module_details_id",
+                    foreignField: "_id",
+                    as: "moduleDetailsData"
+                }
+            }
+            let data = await resourceModel.aggregate([
+                matchStage,
                 joinWithCourseId,
                 joinWithModuleId,
                 joinWithModuleDetailsId

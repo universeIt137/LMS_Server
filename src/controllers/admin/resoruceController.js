@@ -79,6 +79,10 @@ class resourceClass {
         let data = await resourceService.allResourceService();
         res.send(data);
     };
+    singleResourceServiceById = async function(req,res){
+        let data = await resourceService.singleResourceService(req);
+        res.send(data);
+    };
 
 }
 
