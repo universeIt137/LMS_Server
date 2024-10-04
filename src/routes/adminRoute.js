@@ -363,6 +363,9 @@ router.post
     moduleDetailsController.create
 );
 
+router.delete("/module-details/delete/:id", moduleDetailsController.moduleDetailsDelete);
+router.get("/all/modules/details",moduleDetailsController.allModuleDetails);
+
 
 // resource api 
 

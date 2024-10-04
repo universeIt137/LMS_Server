@@ -30,6 +30,7 @@ class moduleServicesClass {
                     "total_quiz_test" : 1,
                     "courseData.course_name" : 1,
                     "courseData.course_img": 1,
+                    "courseData.batch_no" : 1,
                 }
             }
 
@@ -72,9 +73,9 @@ class moduleServicesClass {
         
             let projection = {
                 $project: {
+                "course_id" :0,
                 "updatedAt": 0,
                 "data._id": 0,
-                "data.course_img": 0,
                 "data.instructor_name": 0,
                 "data.instructor_img": 0,
                 "data.total_sit": 0,
