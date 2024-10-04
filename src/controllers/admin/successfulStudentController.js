@@ -23,12 +23,13 @@ class successfulStudentClass {
     update = async (req, res) => {
         try {
             let id = req.params.id;
-            console.log(id)
-            let filter = { _id: id };
             let reqBody = req.body;
             let update = reqBody;
-            let data = await successfulStudentModel.findById({ _id: id });
-            console.log(data);
+            let filter = { _id: id };
+
+            // Use findById with the id directly
+            let data = await successfulStudentModel.findById(id);
+
             if (!data) return res.status(404).json({
                 status: "fail",
                 msg: "student data not found",
@@ -70,10 +71,14 @@ class successfulStudentClass {
         }
     };
 
-    allSuccessfulStudentByAdmin = async (req, res) => {
+    allSuccessfulStudent = async (req, res) => {
         let data = await courseSuccessfulStudent()
         res.send(data);
-    }
+    };
+    getSingleStudentById = async (req, res) => {
+        let data = await courseSuccessfulStudent.getSingleStudentService(req);
+        res.send(data);
+    };
 };
 
 
