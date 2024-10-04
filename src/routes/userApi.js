@@ -48,6 +48,7 @@ router.get(
   "/get-all-course-details",
   courseDetailsController.getAllCourseDetails
 );
+
 router.get("/get-single-course-details/:id", courseDetailsController.getSingleCourseDetails)
 
 

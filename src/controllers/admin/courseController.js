@@ -72,7 +72,7 @@ class courseClass {
     }
   };
 
-  allCourseByAdmin = async (req, res) => {
+  allCourse = async (req, res) => {
     try {
       let data = await courseModel.find();
       if (data.length === 0)

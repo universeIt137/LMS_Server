@@ -90,11 +90,12 @@ router.delete
 
 router.get
 (
-    "/admin-all-course",  
-    courseController.allCourseByAdmin
+    "/all-course",  
+    courseController.allCourse
 );
 
 router.get("/all-course-name", courseController.allCourseName);
+
 
 // courseDetails related api
 
