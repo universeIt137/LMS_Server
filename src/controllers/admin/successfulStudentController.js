@@ -1,6 +1,5 @@
 const successfulStudentModel = require("../../models/successfullStudentModel");
 const courseSuccessfulStudent = require("../../services/curseSuccessfulStudentService");
-const cloudHelper = require("../../helper/cloudinaryHelper")
 
 
 class successfulStudentClass {
