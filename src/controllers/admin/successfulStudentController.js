@@ -72,7 +72,7 @@ class successfulStudentClass {
     };
 
     allSuccessfulStudent = async (req, res) => {
-        let data = await courseSuccessfulStudent()
+        let data = await courseSuccessfulStudent.courseSuccessfulStudent()
         res.send(data);
     };
     getSingleStudentById = async (req, res) => {
