@@ -9,8 +9,8 @@ const lernerFeedbackSchema = new Schema({
     course_id : {
         type : mongoose.Schema.Types.ObjectId,
     },
-    student_id : {
-        type : mongoose.Schema.Types.ObjectId,
+    img : {
+        type : String,
     },
     feedback : {
         type : String
