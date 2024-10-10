@@ -14,18 +14,10 @@ class feedbackClass {
                 }
             };
             // join with student id
-            let joinWithStudentId = {
-                $lookup: {
-                    from: "users",
-                    localField: "student_id",
-                    foreignField: "_id",
-                    as: "studentData"
-                }
-            };
+            
 
             // unwind courseData
             const unwindCourseData = {  $unwind: "$courseData" };
-            const unwindStudentData = {  $unwind: "$studentData" };
 
             // projection
 
@@ -40,11 +32,10 @@ class feedbackClass {
 
             let data = await feedbackModel.aggregate([
                 joinWithCourseId,
-                joinWithStudentId,
-                unwindStudentData,
                 unwindCourseData,
-                projection
+                // projection
             ]);
+
             if(data.length===0){
                 return {
                     status: "fail",
