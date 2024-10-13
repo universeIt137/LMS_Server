@@ -70,38 +70,17 @@ class feedbackClass {
                     as: "courseData"
                 }
             };
-            // join with student id
-            let joinWithStudentId = {
-                $lookup: {
-                    from: "users",
-                    localField: "student_id",
-                    foreignField: "_id",
-                    as: "studentData"
-                }
-            };
+            
 
             // unwind courseData
             const unwindCourseData = {  $unwind: "$courseData" };
-            const unwindStudentData = {  $unwind: "$studentData" };
-
-            // projection
-
-            const projection = {
-                $project: {
-                    "feedback": 1,
-                    "courseData.course_name": 1,
-                    "studentData.profile_pick" : 1,
-                }
-            };
             
 
             let data = await feedbackModel.aggregate([
                 matchStage,
                 joinWithCourseId,
-                joinWithStudentId,
-                unwindStudentData,
-                unwindCourseData,
-                projection
+                unwindCourseData
+                
             ]);
             if(data.length===0){
                 return {
