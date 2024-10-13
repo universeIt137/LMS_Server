@@ -238,7 +238,9 @@ router.get
 
 router.get("/single/instructor/:id", instructorController.getSingleInstructorById);
 
-router.get("/instructors-name", instructorController.allInstructorName)
+router.get("/instructors-name", instructorController.allInstructorName);
+router.get("/instructor-profile/:id", instructorController.instructorProfile);
+router.get("/all-instructors", instructorController.allInstructor);
 
 // successful student related api
 
