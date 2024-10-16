@@ -80,7 +80,8 @@ class assignmentClass {
     };
 
     singleAssignment = async (req,res)=>{
-        
+        let data = await assignmentService.singleAssignmentService(req);
+        res.send(data);
     };
 }
 

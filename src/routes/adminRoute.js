@@ -362,6 +362,8 @@ router.get(
     assignmentController.allAssignmentByAdmin
 );
 
+router.get("/single-assignment/:assignmentId" , assignmentController.singleAssignment);
+
 // module details api
 
 router.post
