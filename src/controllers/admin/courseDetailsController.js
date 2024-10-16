@@ -1,4 +1,5 @@
 const courseDetailsModel = require("../../models/courseDetailsModel");
+const courseDetailsService = require("../../services/courseDetailsService"); 
 
 class courseDetailsClass {
     courseDetailsCreated = async (req,res)=>{
@@ -83,6 +84,10 @@ class courseDetailsClass {
                 msg : error.toString()
             });
         }
+    };
+    courseDetailsByCourseId = async (req,res)=>{
+        const data = await courseDetailsService.courseDetailsByCourseId(req);
+        res.send(data);
     };
     
 }
