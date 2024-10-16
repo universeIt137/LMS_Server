@@ -145,6 +145,7 @@ router.put
 );
 
 router.get("/single/curriculum/:id", curriculumController.getSingleCurriculumById );
+router.get("/curriculum-by-course-id/:course_id" , curriculumController.curriculumByCourseId);
 
 router.get
 (
