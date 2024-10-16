@@ -80,6 +80,12 @@ class feedbackClass {
         const data = await feedbackService.singleFeedbackService(req);
         res.send(data);
     };
+
+    feedbackByCourseId = async (req,res)=>{
+        const data = await feedbackService.feedbackByCourseIdService(req);
+        res.send(data);
+    };
+
 }
 
 const feedbackController = new feedbackClass();

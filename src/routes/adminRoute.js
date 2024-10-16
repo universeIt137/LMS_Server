@@ -301,6 +301,7 @@ router.get
 );
 
 router.get("/single-feedback/:id",feedbackController.singleFeedbackById);
+router.get("/feedback-by-courseId/:courseId", feedbackController.feedbackByCourseId);
 
 // module related api
 
