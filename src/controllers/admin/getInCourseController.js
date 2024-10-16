@@ -75,7 +75,13 @@ class getInCourseClass {
     singleGetInCourseById = async (req,res)=>{
         let data = await getInCourseService.singleGetInService(req);
         res.send(data);
-    }
+    };
+    getInCourseByCourseId = async (req,res)=>{
+        let data = await getInCourseService.getInCourseByCourseIdService(req);
+        res.send(data);
+    };
+
+
 
 }
 
