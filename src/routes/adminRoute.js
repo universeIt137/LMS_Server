@@ -272,6 +272,7 @@ router.get
 );
 
 router.get("/single/successful-student/:id", successfulStudentController.getSingleStudentById);
+router.get("/successful-student-by-course-id/:courseId", successfulStudentController.studentByCourseId);
 
 // feedback related api
 

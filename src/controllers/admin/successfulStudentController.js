@@ -1,5 +1,5 @@
 const successfulStudentModel = require("../../models/successfullStudentModel");
-const courseSuccessfulStudent = require("../../services/curseSuccessfulStudentService");
+const {successfulStudentByCourseIdService,getSingleStudentService,courseSuccessfulStudent} = require("../../services/curseSuccessfulStudentService");
 
 
 class successfulStudentClass {
@@ -72,11 +72,15 @@ class successfulStudentClass {
     };
 
     allSuccessfulStudent = async (req, res) => {
-        let data = await courseSuccessfulStudent.courseSuccessfulStudent()
+        let data = await courseSuccessfulStudent()
         res.send(data);
     };
     getSingleStudentById = async (req, res) => {
-        let data = await courseSuccessfulStudent.getSingleStudentService(req);
+        let data = await getSingleStudentService(req);
+        res.send(data);
+    };
+    studentByCourseId = async (req, res) => {
+        let data = await successfulStudentByCourseIdService(req);
         res.send(data);
     };
 };
