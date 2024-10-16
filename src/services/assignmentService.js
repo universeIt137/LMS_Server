@@ -42,7 +42,6 @@ class assignmentServiceClass{
                 joinWithModuleId,
                 unwindData,
                 moduleData,
-                projection
             ]);
 
             if(data.length===0){
