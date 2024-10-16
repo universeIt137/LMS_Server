@@ -180,6 +180,7 @@ router.get
 )
 
 router.get("/get/in/course/:id", getInCourseController.singleGetInCourseById);
+router.get("/get-in-corse/by-corse-id/:courseId", getInCourseController.getInCourseByCourseId  );
 
 
 // project related api
