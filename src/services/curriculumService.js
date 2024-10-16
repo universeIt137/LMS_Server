@@ -114,7 +114,51 @@ class curriculumClass {
                 message : error.toString()
             }
         }
-    }
+    };
+
+    curriculumByCourseIdService = async (req)=>{
+        let id = new mongoose.Types.ObjectId(req.params.course_id);
+        let matchStage = {$match: { course_id : id } }
+        try {
+            // join with course id 
+            let joinWithCourseId = {
+                $lookup: {
+                    from: "courses",
+                    localField: "course_id",
+                    foreignField: "_id",
+                    as: "courseData"
+                }
+            };
+
+            // unwind courseData
+            const unwindCourseData = {  $unwind: "$courseData" };
+
+            const data = await curriculumModel.aggregate([
+                    matchStage,
+                    joinWithCourseId
+            ]);
+
+            if(data.length < 0) {
+                return {
+                    status: "fail",
+                    message: "No curriculum found for this course",
+                };
+            }
+
+            return {
+                status: "success",
+                message: "Curriculums retrieved successfully for this course",
+                data : data 
+            };
+
+        } catch (error) {
+            return {
+                status : "fail",
+                message : error.toString()
+            }
+        }
+    };
+
 }
 
 const curriculumService = new curriculumClass();
