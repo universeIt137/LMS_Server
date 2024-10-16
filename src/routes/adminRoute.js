@@ -210,7 +210,8 @@ router.get
 
 )
 
-router.get("/single/project/:id", projectController.getSingleProjectById )
+router.get("/single/project/:id", projectController.getSingleProjectById );
+router.get("/project-by/course-id/:course_id", projectController.getProjectByCourseId);
 
 // instructor related api
 
