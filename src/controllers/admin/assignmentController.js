@@ -83,6 +83,11 @@ class assignmentClass {
         let data = await assignmentService.singleAssignmentService(req);
         res.send(data);
     };
+
+    assignmentByCourseId = async (req,res)=>{
+        let data = await assignmentService.assignmentByCourseIdsService(req);
+        res.send(data);
+    }
 }
 
 const assignmentController = new assignmentClass();

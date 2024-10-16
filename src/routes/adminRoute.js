@@ -364,6 +364,8 @@ router.get(
 
 router.get("/single-assignment/:assignmentId" , assignmentController.singleAssignment);
 
+router.get("/assignment-by-course-id/:courseId", assignmentController.assignmentByCourseId);
+
 // module details api
 
 router.post
