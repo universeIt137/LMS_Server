@@ -238,7 +238,7 @@ router.get
     "/all/instructor",
     instructorController.allInstructorByAdmin
 );
-
+router.get("/instructor-by/course-id/:courseId", instructorController.instructorByCourseId);
 router.get("/single/instructor/:id", instructorController.getSingleInstructorById);
 
 router.get("/instructors-name", instructorController.allInstructorName);
@@ -272,6 +272,7 @@ router.get
 );
 
 router.get("/single/successful-student/:id", successfulStudentController.getSingleStudentById);
+router.get("/successful-student-by-course-id/:courseId", successfulStudentController.studentByCourseId);
 
 // feedback related api
 
@@ -300,6 +301,7 @@ router.get
 );
 
 router.get("/single-feedback/:id",feedbackController.singleFeedbackById);
+router.get("/feedback-by-courseId/:courseId", feedbackController.feedbackByCourseId);
 
 // module related api
 

@@ -137,7 +137,11 @@ class instructorClass {
         res.send(data);
     };
 
-    
+    instructorByCourseId = async (req, res) => {
+        let data = await instructorService.instructorByCourseId(req);
+        res.send(data);
+    };
+
 
 
 }
