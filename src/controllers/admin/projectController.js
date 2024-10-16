@@ -23,45 +23,31 @@ class projectClass {
 
   updateProject = async (req, res) => {
     try {
+      
       let id = req.params.id;
       let filter = { _id: id };
-      let { project_name, course_id } = req.body;
-      let projectImg = "";
-
-      if (req.file) {
-        const result = await cludHelper.uploader.upload(req.file.path, {
-          folder: "project-images",
-        });
-        projectImg = result.secure_url;
-      }
-
-      let update = {
-        project_name,
-        course_id,
-        project_img: projectImg,
-      };
-
-
       let data = await projectModel.findById({ _id: id });
       if (!data)
         return res.status(404).json({
           status: "fail",
           msg: "Project data not found",
         });
-
-      let updateData = await projectModel.findByIdAndUpdate(filter, update, {
+        
+      let updateData = await projectModel.findByIdAndUpdate(filter, req.body, {
         new: true,
       });
       return res.status(200).json({
         status: "success",
-        msg: "Project data update successfully",
+        msg: "Project data updated successfully",
         data: updateData,
-      });
+      }); 
+
+
     } catch (error) {
       return res.status(500).json({
         status: "fail",
         msg: error.toString(),
-      });
+      })
     }
   };
 
@@ -98,6 +84,10 @@ class projectClass {
 
   getSingleProjectById = async (req, res) => {
     let data = await projectService.getSingleProjectService(req);
+    res.send(data);
+  };
+  getProjectByCourseId = async (req, res) => {
+    let data = await projectService.projectByCourseIdService (req);
     res.send(data);
   };
 }
