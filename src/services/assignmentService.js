@@ -121,6 +121,63 @@ class assignmentServiceClass{
             };
         }
     };
+
+    assignmentByCourseIdsService  = async (req)=>{
+        let id = new mongoose.Types.ObjectId(req.params.courseId);
+        let matchStage = { $match: { course_id : id } };
+        try {
+            // join course id
+            let joinCourseId = {
+                    $lookup: {
+                    from: "courses",
+                    localField: "course_id",
+                    foreignField: "_id",
+                    as: "data"
+                }
+            };
+
+            // join with module id
+
+            const joinWithModuleId = {
+                $lookup: {
+                from: "modules",
+                localField: "module_id",
+                foreignField: "_id",
+                as: "moduleData"
+            }
+        };
+
+        const unwindData = { "$unwind" : "$data" };
+        const moduleData = {"$unwind" : "$moduleData"};
+        
+        
+
+            let data = await assignmentModel.aggregate([
+                matchStage,
+                joinCourseId,
+                joinWithModuleId,
+                unwindData,
+                moduleData,
+            ]);
+
+            if(data.length===0){
+                return {
+                    status:"fail",
+                    msg : "Assignment not found"
+                };
+            }
+            return {
+                status:"success",
+                msg : "Assignment by course id data found",
+                data : data
+            };
+        } catch (error) {
+            return {
+                status:"fail",
+                msg : error.toString()
+            };
+        }
+    };
 }
 
 const assignmentService = new assignmentServiceClass();
