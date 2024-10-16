@@ -238,7 +238,7 @@ router.get
     "/all/instructor",
     instructorController.allInstructorByAdmin
 );
-
+router.get("/instructor-by/course-id/:courseId", instructorController.instructorByCourseId);
 router.get("/single/instructor/:id", instructorController.getSingleInstructorById);
 
 router.get("/instructors-name", instructorController.allInstructorName);
