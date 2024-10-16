@@ -123,6 +123,8 @@ router.get
     courseDetailsController.getAllCourseDetails
 );
 
+router.get("/course-details-by-courseId/:courseId", courseDetailsController.courseDetailsByCourseId);
+
 
 // curriculum related api
 
