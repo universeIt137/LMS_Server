@@ -84,6 +84,7 @@ class courseDetailsClass {
             });
         }
     };
+    
 }
 
 const courseDetailsController = new courseDetailsClass();

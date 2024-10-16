@@ -79,6 +79,9 @@ class assignmentClass {
         res.send(data);
     };
 
+    singleAssignment = async (req,res)=>{
+        
+    };
 }
 
 const assignmentController = new assignmentClass();
