@@ -135,7 +135,8 @@ class curriculumClass {
 
             const data = await curriculumModel.aggregate([
                     matchStage,
-                    joinWithCourseId
+                    joinWithCourseId,
+                    unwindCourseData
             ]);
 
             if(data.length < 0) {
