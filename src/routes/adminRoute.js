@@ -337,6 +337,8 @@ router.get
     moduleController.getSingleModuleByAdmin
 );
 
+router.get("/module-by-course-id/:courseId", moduleController.moduleByCourseId);
+
 
 
 // assignment related api
