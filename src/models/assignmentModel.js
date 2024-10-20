@@ -5,6 +5,9 @@ const assignmentSchema = new Schema({
         type : String,
         require : [true, "assignment name required" ]
     },
+    assignment_des : {
+        type : String,
+    },
     course_id : {
         type : mongoose.Schema.Types.ObjectId,
     },
