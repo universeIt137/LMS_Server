@@ -124,6 +124,7 @@ router.get
 );
 
 router.get("/course-details-by-courseId/:courseId", courseDetailsController.courseDetailsByCourseId);
+router.get("/single-course-details/:id" , courseDetailsController.singleCourseDetails); 
 
 
 // curriculum related api

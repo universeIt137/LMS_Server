@@ -89,6 +89,11 @@ class courseDetailsClass {
         const data = await courseDetailsService.courseDetailsByCourseId(req);
         res.send(data);
     };
+
+    singleCourseDetails = async (req,res)=>{
+        const data = await courseDetailsService.singleCourseDetailsService(req);
+        res.send(data);
+    };
     
 }
 
