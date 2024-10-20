@@ -50,9 +50,8 @@ const liveClassController = require("../controllers/admin/liveClassController.js
 
 // img middleware
 
-
-
-
+// pre record controller
+const uploadVideoController = require("../controllers/admin/adminUploadVideoController.js");
 ///auth api
 router.delete
 (
@@ -413,6 +412,10 @@ router.post
     "/live-class/create",
     liveClassController.create
 )
+
+// upload vide related api 
+
+router.post("/upload/video" , uploadVideoController.uploadPreRecordVideo);
 
 
 module.exports = router;
