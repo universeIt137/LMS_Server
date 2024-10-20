@@ -416,6 +416,7 @@ router.post
 // upload vide related api 
 
 router.post("/upload/video" , uploadVideoController.uploadPreRecordVideo);
+router.put("/update/video/:id", uploadVideoController.updatePreRecordVideo);
 
 
 module.exports = router;
