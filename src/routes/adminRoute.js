@@ -420,6 +420,7 @@ router.put("/update/video/:id", uploadVideoController.updatePreRecordVideo);
 router.delete("/delete/video/:id", uploadVideoController.deletePreRecordVideo);
 router.get("/all/video", uploadVideoController.allPreRecordVideo);
 router.get("/video-by-module-id/:id", uploadVideoController.preRecordVideoByModuleId);
+router.get("/single/video/:id", uploadVideoController.singlePreRecordVideo);
 
 
 module.exports = router;
