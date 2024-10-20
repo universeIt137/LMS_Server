@@ -1,6 +1,6 @@
 
 const preRecordVideoModel = require("../../models/preRecordVideoModel");
-const { preRecordVideoByModuleIdService } = require("../../services/preRecordVideoService");
+const { preRecordVideoByModuleIdService,singlePreRecordVideoService } = require("../../services/preRecordVideoService");
 
 exports.uploadPreRecordVideo = async(req,res)=>{
     try {
@@ -88,5 +88,10 @@ exports.allPreRecordVideo = async(req,res)=>{
 
 exports.preRecordVideoByModuleId = async(req,res)=>{
     const data = await preRecordVideoByModuleIdService(req);
+    res.send(data);
+};
+
+exports.singlePreRecordVideo = async(req,res)=>{
+    const data = await singlePreRecordVideoService(req);
     res.send(data);
 };
