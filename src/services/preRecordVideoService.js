@@ -25,12 +25,12 @@ exports.preRecordVideoByModuleIdService = async (req) => {
             }
         };
 
-        const unwindModuleData = { 
-            $unwind: { path: "$moduleData", preserveNullAndEmptyArrays: true } 
+        const unwindModuleData = {
+            $unwind: { path: "$moduleData", preserveNullAndEmptyArrays: true }
         };
 
-        const unwindCourseData = { 
-            $unwind: { path: "$courseData", preserveNullAndEmptyArrays: true } 
+        const unwindCourseData = {
+            $unwind: { path: "$courseData", preserveNullAndEmptyArrays: true }
         };
 
         const data = await preRecordVideoModel.aggregate([
@@ -53,5 +53,60 @@ exports.preRecordVideoByModuleIdService = async (req) => {
 
     } catch (error) {
         return { status: "fail", msg: `Error: ${error.message}` };
+    }
+};
+
+exports.singlePreRecordVideoService = async (req) => {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    const matchStage = { $match: { _id: id } };
+    try {
+        const joinWithModuleId = {
+            $lookup: {
+                from: "modules",
+                localField: "module_id",
+                foreignField: "_id",
+                as: "moduleData"
+            }
+        };
+
+        const joinWithCourseId = {
+            $lookup: {
+                from: "courses",
+                localField: "course_id",
+                foreignField: "_id",
+                as: "courseData"
+            }
+        };
+
+        const unwindModuleData = {
+            $unwind: { path: "$moduleData", preserveNullAndEmptyArrays: true }
+        };
+
+        const unwindCourseData = {
+            $unwind: { path: "$courseData", preserveNullAndEmptyArrays: true }
+        };
+
+        const data = await preRecordVideoModel.aggregate([
+            matchStage,
+            joinWithModuleId,
+            joinWithCourseId,
+            unwindModuleData,
+            unwindCourseData,
+        ]);
+
+        if (data.length === 0) {
+            return { status: "fail", msg: "Data not found" };
+        }
+        return {
+            status: "success",
+            msg: "Get data by id successfully",
+            data: data,
+        };
+
+    } catch (error) {
+        return{
+            status: "fail",
+            msg: `Error: ${error.message}`
+        }
     }
 };
