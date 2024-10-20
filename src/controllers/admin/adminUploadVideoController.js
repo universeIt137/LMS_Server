@@ -1,5 +1,6 @@
 
 const preRecordVideoModel = require("../../models/preRecordVideoModel");
+const { preRecordVideoByModuleIdService } = require("../../services/preRecordVideoService");
 
 exports.uploadPreRecordVideo = async(req,res)=>{
     try {
@@ -83,4 +84,9 @@ exports.allPreRecordVideo = async(req,res)=>{
             msg: error.message
         });
     }
+};
+
+exports.preRecordVideoByModuleId = async(req,res)=>{
+    const data = await preRecordVideoByModuleIdService(req);
+    res.send(data);
 };
