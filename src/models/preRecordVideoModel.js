@@ -9,7 +9,7 @@ const proRecordSchema = new Schema({
     module_id : {
         type : mongoose.Schema.Types.ObjectId,
     },
-    video_tile : {
+    video_title : {
         type : String,
         required : [true,"Video title_must be required"]
     },
