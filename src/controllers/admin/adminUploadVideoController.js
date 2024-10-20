@@ -47,3 +47,40 @@ exports.updatePreRecordVideo = async(req,res)=>{
         })
     }
 };
+
+exports.deletePreRecordVideo = async(req,res)=>{
+    try {
+        let id = req.params.id;
+        let data = await preRecordVideoModel.findByIdAndDelete({_id : id});
+        if(!data){
+            return res.status(404).json({
+                status: "fail",
+                msg: "Video not found"
+            });
+        }
+        return res.status(200).json({
+            status: "success",
+            msg: "Video deleted successfully",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            msg: error.message
+        });
+    }
+};
+
+exports.allPreRecordVideo = async(req,res)=>{
+    try {
+        let data = await preRecordVideoModel.find({});
+        return res.status(200).json({
+            status: "success",
+            data : data
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            msg: error.message
+        });
+    }
+};
