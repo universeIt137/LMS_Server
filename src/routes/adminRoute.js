@@ -421,6 +421,7 @@ router.delete("/delete/video/:id", uploadVideoController.deletePreRecordVideo);
 router.get("/all/video", uploadVideoController.allPreRecordVideo);
 router.get("/video-by-module-id/:id", uploadVideoController.preRecordVideoByModuleId);
 router.get("/single/video/:id", uploadVideoController.singlePreRecordVideo);
+router.get("/module/name", moduleController.moduleName);
 
 
 module.exports = router;
